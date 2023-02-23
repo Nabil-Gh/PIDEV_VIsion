@@ -1,0 +1,139 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Consultation{% endblock %}
+
+{% block body %}
+
+<div><div class="ui-title-page bg_title bg_transparent">
+    <div class="container">
+      <div class="row">
+      <div class="col-1">
+      </div>
+        <div class="col-11">
+          <h4>Consultation du patient</h4>
+          <ul class="breadcrumb padding-0">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-user-md"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Medecin</a></li>
+                        <li class="breadcrumb-item ">Consultation du patient</li>
+                    </ul>
+          <div class="ui-subtitle-page">les médecins devraient avoir des informations sur les patients. </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end ui-title-page -->
+
+
+  <div class="border_btm">
+    <div class="container">
+      <div class="row">
+      <div class="col-1">
+      </div>
+        <div class="col-11">
+          <ol class="breadcrumb">
+            <li><a href="javascript:void(0);"><i class="icon icon-home color_primary"></i></a></li>
+            <li class="active">enregistrer les informations</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div><!-- end breadcrumb -->
+
+
+  <main class="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-1">
+      </div>
+        <div class="col-11">
+            <img src="https://assets.weforum.org/article/image/23jQZE3Vj7IHwdu6yFoIHDB7UVa9kYGJnM3VA90LA9I.jpg" height="300" width="1170" alt="Foto">
+            <div class="ui-subtitle-block ui-subtitle-block_form">Veuillez remplir le formulaire ci-dessous avec les informations patient nécessaires. </div>
+            <i class="decor-brand"></i>
+          </div>
+        </div><!-- end row -->
+        
+{{form_start(form,{attr:{novalidate:'novalidate'}})}}
+        <form class="form-appointment ui-form">
+          <div class="row">
+          <div class="col-1">
+      </div>
+            <div class="col-md-5 col-md-offset-1">
+            
+              
+                
+{{form_label(form.fname,"Nom")}}
+{{form_widget(form.fname,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.fname,{'attr':{'class':'text-danger'}})}}
+       
+              
+              
+                
+{{form_label(form.email,'Adresse email')}}
+{{form_widget(form.email,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.email,{'attr':{'class':'text-danger'}})}}
+
+              
+              
+              
+                
+{{form_label(form.datec,"Date du consultation ")}}
+{{form_widget(form.datec,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.datec,{'attr':{'class':'text-danger'}})}}
+
+                
+             
+            
+            </div>
+            <div class="col-md-5">
+              
+               
+{{form_label(form.lname,"Prénom")}}
+{{form_widget(form.lname,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.lname,{'attr':{'class':'text-danger'}})}}
+
+             
+                
+{{form_label(form.phone,'Numéro de téléphone')}}
+{{form_widget(form.phone,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.phone,{'attr':{'class':'text-danger'}})}}
+
+              
+                
+{{form_label(form.timec,'Heure du consultation')}}
+{{form_widget(form.timec,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.timec,{'attr':{'class':'text-danger'}})}}
+
+              
+              
+              
+            </div>
+          </div><!-- end row -->
+          <div class="row">
+          <div class="col-1">
+      </div>
+            <div class="col-11">
+              
+                <div class="form-group">
+{{form_label(form.typec ,"Sujet/consultation")}}
+{{form_widget(form.typec,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.typec,{'attr':{'class':'text-danger'}})}}
+</div>
+              
+                <div class="form-group">
+{{form_label(form.adresse,'Adresse du patient')}}
+{{form_widget(form.adresse,{'attr':{'class':'form-control'}})}}
+{{form_errors(form.adresse,{'attr':{'class':'text-danger'}})}}
+</div>
+              <div class="form-group">
+              
+              <button class="btn btn-primary" style=" background-color:orange;">Submit <span class="btn-plus">+</span></button>
+            </div></div>
+            {{form_end(form)}}
+          </div><!-- end row -->
+        </form><!-- end form-appointment -->
+      </div><!-- end container -->
+    </section><!-- end section --> 
+
+
+  </main></div>
+{% endblock %}

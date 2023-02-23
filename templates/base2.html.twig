@@ -1,0 +1,347 @@
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> 
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{% block title %}{% endblock %}</title>
+<link rel="icon" href="{{asset('img/dologo_s.png')}}" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/morrisjs/morris.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css')}}"/>
+<script src="{{asset('https://kit.fontawesome.com/7e76930a12.js')}}" crossorigin="anonymous"></script>
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
+
+
+</head>
+<body class="theme-black">
+<!-- Page Loader -->
+<div class="page-loader-wrapper"> 
+    <div class="loader">
+        <div class="m-t-30"><img src="{{asset('img/dologo_light.png')}}" height="200" width="350" alt="Alpino"></div>
+        <p>Please wait...</p>        
+    </div>
+</div>
+
+<div class="overlay"></div><!-- Overlay For Sidebars -->
+
+<!-- Left Sidebar -->
+<aside id="minileftbar" class="minileftbar">
+    <ul class="menu_list">
+        <li>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="/admin/dashboard"><img src="https://scontent.ftun5-1.fna.fbcdn.net/v/t1.15752-9/326454936_917896406152725_2306321422860661523_n.png?_nc_cat=107&ccb=1-7&_nc_sid=ae9488&_nc_ohc=aSQ2s96BWkcAX9PsI6u&_nc_ht=scontent.ftun5-1.fna&oh=03_AdQezIyZKoHEI9lNgAtgsPPbXTuxfmHirvxKsccaf4xPww&oe=641ED6CF" alt="DoCare"></a>
+        </li>
+               
+        <li><a href="javascript:void(0);" class="menu-sm"><i class="zmdi zmdi-swap"></i></a></li>        
+        
+        <li class="notifications badgebit">
+            <a href="javascript:void(0);">
+                <i class="zmdi zmdi-notifications"></i>
+                
+                    <div class="notify">
+                      <span class="heartbit"></span>
+                      <span class="point"></span>
+                    </div>
+
+                    
+                
+                
+
+           
+                
+                
+            </a>
+        </li>
+        
+               
+        <li><a href="javascript:void(0);" class="fullscreen" data-provide="fullscreen"><i class="zmdi zmdi-fullscreen"></i></a></li>
+        <li><a href="/logout" ><i class="fa-solid fa-power-off"></i></a></li>
+        <li class="power">
+            <a href="javascript:void(0);" class="js-right-sidebar"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a>            
+            <a href="sign-in.html" class="mega-menu"><i class="zmdi zmdi-power"></i></a>
+        </li>
+    </ul>    
+</aside>
+
+<aside class="right_menu">
+    
+    <div class="notif-menu">
+        <div class="slim_scroll">
+            
+            <div class="card">
+                <div class="header">
+                    <h2><strong>Notifications</strong></h2>
+                </div>
+                <div class="body">
+                    <ul class="notification list-unstyled">
+                    
+                        <li>
+                            <i class="zmdi zmdi-assignment"></i>
+                            
+                            <p class="message"></p>
+                            
+                            <p><a href="">Vérifier la demande</a></p>
+
+                            <small class="text-muted">55</small>
+                        </li>
+                      
+                    </ul>  
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h2><strong>Messages</strong></h2>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="rightsidebar" class="right-sidebar">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#setting">Setting</a></li>        
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activity">Activity</a></li>
+        </ul>
+        <div class="tab-content slim_scroll">
+            <div class="tab-pane slideRight active" id="setting">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Colors</strong> Skins</h2>
+                    </div>
+                    <div class="body">
+                        <ul class="choose-skin list-unstyled m-b-0">
+                            <li data-theme="black" class="active">
+                                <div class="black"></div>
+                            </li>
+                            <li data-theme="purple">
+                                <div class="purple"></div>
+                            </li>                   
+                            <li data-theme="blue">
+                                <div class="blue"></div>
+                            </li>
+                            <li data-theme="cyan">
+                                <div class="cyan"></div>                    
+                            </li>
+                            <li data-theme="green">
+                                <div class="green"></div>
+                            </li>
+                            <li data-theme="orange">
+                                <div class="orange"></div>
+                            </li>
+                            <li data-theme="blush">
+                                <div class="blush"></div>                    
+                            </li>
+                        </ul>
+                    </div>
+                </div>                
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>General</strong> Settings</h2>
+                    </div>
+                    <div class="body">
+                        <ul class="setting-list list-unstyled m-b-0">
+                            <li>
+                                <div class="checkbox">
+                                    <input id="checkbox1" type="checkbox">
+                                    <label for="checkbox1">Report Panel Usage</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input id="checkbox2" type="checkbox" checked="">
+                                    <label for="checkbox2">Email Redirect</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input id="checkbox3" type="checkbox">
+                                    <label for="checkbox3">Notifications</label>
+                                </div>                        
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input id="checkbox4" type="checkbox">
+                                    <label for="checkbox4">Auto Updates</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input id="checkbox5" type="checkbox" checked="">
+                                    <label for="checkbox5">Offline</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox m-b-0">
+                                    <input id="checkbox6" type="checkbox">
+                                    <label for="checkbox6">Location Permission</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Left</strong> Menu</h2>
+                    </div>
+                    <div class="body theme-light-dark">
+                        <button class="t-dark btn btn-primary btn-round btn-block">Dark</button>
+                    </div>
+                </div>               
+            </div>
+            <div class="tab-pane slideLeft" id="activity">
+                <div class="card activities">
+                    <div class="header">
+                        <h2><strong>Recent</strong> Activity Feed</h2>
+                    </div>
+                    <div class="body">
+                        <div class="streamline b-accent">
+                            <div class="sl-item">
+                                <div class="sl-content">
+                                    <div class="text-muted">Just now</div>
+                                    <p>Finished task <a href="" class="text-info">#features 4</a>.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-info">
+                                <div class="sl-content">
+                                    <div class="text-muted">10:30</div>
+                                    <p><a href="">@Jessi</a> retwit your post</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-primary">
+                                <div class="sl-content">
+                                    <div class="text-muted">12:30</div>
+                                    <p>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-warning">
+                                <div class="sl-content">
+                                    <div class="text-muted">1 days ago</div>
+                                    <p><a href="" class="text-info">Jessi</a> commented your post.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-primary">
+                                <div class="sl-content">
+                                    <div class="text-muted">2 days ago</div>
+                                    <p>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-primary">
+                                <div class="sl-content">
+                                    <div class="text-muted">3 days ago</div>
+                                    <p>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-warning">
+                                <div class="sl-content">
+                                    <div class="text-muted">4 Week ago</div>
+                                    <p><a href="" class="text-info">Jessi</a> commented your post.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-warning">
+                                <div class="sl-content">
+                                    <div class="text-muted">5 days ago</div>
+                                    <p><a href="" class="text-info">Jessi</a> commented your post.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-primary">
+                                <div class="sl-content">
+                                    <div class="text-muted">5 Week ago</div>
+                                    <p>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-primary">
+                                <div class="sl-content">
+                                    <div class="text-muted">3 Week ago</div>
+                                    <p>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail.</p>
+                                </div>
+                            </div>
+                            <div class="sl-item b-warning">
+                                <div class="sl-content">
+                                    <div class="text-muted">1 Month ago</div>
+                                    <p><a href="" class="text-info">Jessi</a> commented your post.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="leftsidebar" class="sidebar">
+        <div class="menu">
+            <ul class="list">
+                <li>
+                    <div class="user-info m-b-20">
+                        <div class="image">
+                            <a href="profile.html"><img src="{{asset('assets/images/profile_av.jpg')}}"</a>
+                        </div>
+                        <div class="detail">
+                            <h6>aziz</h6>
+                                                       
+                        </div>
+                    </div>
+                </li>
+                <li class="header">MAIN</li>
+                
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="fas fa-user-md"></i><span>Consultation</span></a>
+                    <ul class="ml-menu">
+                        
+                        <li><a href="/consultation">Liste des Consultations</a></li>
+                        <li><a href="/consultation/add">Ajouter une Consultation</a></li>
+                        
+                        
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="fa-solid fa-prescription"></i><span>Ordonnance</span></a>
+                    <ul class="ml-menu">
+                        
+                        <li><a href="/ordonnance">Liste des Ordonnances</a></li>
+                        <li><a href="/ordonnance/add">Ajouter une Ordonnance</a></li>
+                        
+                        
+                    </ul>
+                </li>
+
+                
+             
+                       
+            </ul>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Content -->
+
+        {% block body %}
+        {% endblock %}              
+ 
+<!-- Jquery Core Js -->
+<script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="{{asset('assets/bundles/knob.bundle.js')}}"></script> <!-- Jquery Knob-->
+<script src="{{asset('assets/bundles/jvectormap.bundle.js')}}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{{asset('assets/bundles/morrisscripts.bundle.js')}}"></script> <!-- Morris Plugin Js --> 
+<script src="{{asset('assets/bundles/sparkline.bundle.js')}}"></script> <!-- sparkline Plugin Js --> 
+<script src="{{asset('assets/bundles/doughnut.bundle.js')}}"></script>
+
+<script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
+<script src="{{asset('assets/js/pages/index.js')}}"></script>
+
+<!-- Jquery DataTable Plugin Js --> 
+<script src="{{asset('assets/bundles/datatablescripts.bundle.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.print.min.js')}}"></script>
+
+
+<script src="{{asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
+</body>
+</html>
