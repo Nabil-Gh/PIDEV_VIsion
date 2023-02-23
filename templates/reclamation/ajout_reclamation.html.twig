@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ajouter une reclamation
+{% endblock %}
+
+
+
+{% block body %}
+ <!-- Start Breadcrumb 
+    ============================================= -->
+    <div class="breadcrumb-area gradient-bg bg-cover shadow dark text-light text-center" style="background-image: url(assets/img/banner/8.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h1>Nous contacter</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="fas fa-home"></i>Acceuil</a></li>
+                        <li><a href="#">NOS</a></li>
+                        <li class="active">Contacts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Start Contact Area
+    ============================================= -->
+    <div class="contact-area default-padding">
+        <div class="container">
+            <div class="contact-items">
+                <div class="row">
+                    
+                    <div class="col-lg-8 left-item">
+                        <div class="content">
+                            <h2>Contact our <strong>Support Office</strong></h2>
+							{{ form_start(f,  {'attr': {'novalidate':'novalidate'}}) }}
+                            
+                                
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+										{{ form_widget(f.objet,  {'attr': { 'class':'form-control', 'placeholder': 'Objet'}}) }}
+                                                <span class="text-danger">{{ form_errors(f.objet,{'attr':{'class':'text-danger'}})}}</span>
+
+                                            <span class="alert-error"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+										{{ form_widget(f.type,  {'attr': { 'class':'form-control'}}) }}
+                                            
+                                            <span class="alert-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group comments">
+								{{ form_widget(f.description,  {'attr': { 'class':'form-control', 'placeholder': 'description'}}) }}
+								<span class="text-danger">{{ form_errors(f.description,{'attr':{'class':'text-danger'}})}}</span>
+                                   
+								   
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+										{{ form_widget(f.submit,  {'attr': { 'class':''}}) }}
+
+                                        
+                                    </div>
+                                </div>
+                                
+                            {{ form_end(f) }}
+                        </div>
+                    </div>
+
+                   
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Contact -->
+
+{% endblock %}
+
+
+	
+
+
+				
