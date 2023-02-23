@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste Docs{% endblock %}
+
+{% block body %}
+<div class="breadcrumb-area gradient-bg bg-cover shadow dark text-light text-center" style="background-image: url({{asset('front/img/banner/10.jpg')}})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h1>Vos Documents</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="fas fa-home"></i> Acceuil</a></li>
+                        <li><a href="#">fiches</a></li>
+                        <li class="active">mes documents</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Start Blog
+    ============================================= -->
+    <div class="blog-area full-blog blog-standard full-blog default-padding">
+        <div class="container">
+            <div class="blog-items">
+                <div class="blog-content">
+                    <div class="blog-item-box">
+                        <div class="row">
+                            <!-- Single Item -->
+                               {% for d in docs %}
+                            <div class="col-lg-6 col-md-6 single-item">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <div><img src="{{asset('uploads/doc/'~ d.fichier)}}" alt="Thumb" width="600" height="300">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="meta">
+                                            <ul>
+                                                <li>
+                                                    <i class="fas fa-user"></i>
+                                                    <span>{{fiche.patient.prenom}}</span>
+                                                    <span>{{fiche.patient.nom}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h4>
+                                            <span >{{d.nom}} </span>
+                                        </h4>
+                                        <a class="btn btn-sm btn-theme border circle" href="{{ path ('removed',{'id':d.id}) }}">Supprimer <i class="fas fa-angle-right"></i></a>
+                                        <a class="btn btn-sm btn-theme border circle" href="{{ path ('modifd',{'id':d.id}) }}">Modifier Nom <i class="fas fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}    
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

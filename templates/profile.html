@@ -1,0 +1,156 @@
+
+<body class="theme-black">
+
+<section class="content profile-page">
+    
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="body bg-dark profile-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-12">
+                                <img src="assets/images/profile_av.jpg" class="user_pic rounded img-raised" alt="User">
+                                <div class="detail">
+                                    <div class="u_name">
+                                        <h4><strong>Michael</strong> Deo</h4>
+                                        <span>Ui UX Designer</span>
+                                    </div>
+                                    <div id="m_area_chart"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs profile_tab">
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#overview">Overview</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="overview">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-6">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2><strong>Info</strong></h2>
+                                        
+                                    </div>
+                                    <div class="body">
+                                        <small class="text-muted">Address: </small>
+                                        <p>{{user.id}}</p>
+                                        <div>
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1923731.7533500232!2d-120.39098936853455!3d37.63767091877441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1522391841133" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                        </div>
+                                        <hr>
+                                        <small class="text-muted">Email address: </small>
+                                        <p>{{user.email}}</p>
+                                        <hr>
+                                        <small class="text-muted">Phone: </small>
+                                        <p>{{user.telephone}}</p>
+                                        <hr>
+                                        
+                                        <small class="text-muted">Birth Date: </small>
+                                        <p class="m-b-0">{{user.daten}}</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="header">
+                                        <h2><strong>Your</strong> Documents</h2>
+                                        
+                                    </div>
+                                    <div class="body">
+                                        <ul class="follow_us list-unstyled m-b-0">
+                                            
+                                                <a href="javascript:void(0);">
+                                                    <div class="media">
+                                                        <img class="media-object " src="assets/images/xs/avatar4.jpg" alt="">
+                                                        <div class="media-body">
+                                                            <span class="name">Chris Fox</span>
+                                                            <span class="message">Designer, Blogger</span>
+                                                            <span class="badge badge-outline status"></span>
+                                                        </div>
+                                                    </div>
+                                                </a>                            
+                                            
+                                            
+                                            
+                                            
+                                                                  
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2><strong>Vos</strong> Ordonnances</h2>
+                                       
+                                    </div>
+                                    <div class="body m-b-10">
+                                        
+                                       
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Default Size -->
+<div class="modal fade" id="addevent" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">Add Event</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="number" class="form-control" placeholder="Event Date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Event Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-line">
+                        <textarea class="form-control no-resize" placeholder="Event Description..."></textarea>
+                    </div>
+                </div>      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-round waves-effect">Add</button>
+                <button type="button" class="btn btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Jquery Core Js -->
+<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
+<script src="assets/bundles/morrisscripts.bundle.js"></script> <!-- Morris Plugin Js -->
+<script src="assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts -->
+
+<script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+<script src="assets/js/pages/calendar/calendar.js"></script>
+<script src="assets/js/pages/profile.js"></script>
+</body>
+</html>

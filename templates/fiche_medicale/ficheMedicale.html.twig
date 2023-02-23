@@ -1,0 +1,112 @@
+{% extends 'base2.html.twig' %}
+{% block title %}Rendez-vous
+{% endblock %}
+{% block body %}
+
+
+	<section class="content profile-page">
+		<div class="container-fluid">
+			<div class="block-header">
+				<div class="row clearfix">
+					<div class="col-lg-5 col-md-5 col-sm-12">
+						<h2>Fiches</h2>
+
+					</div>
+
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12">
+					<div class="card">
+						<div class="body bg-dark profile-header">
+							<div class="row">
+								<div class="col-lg-10 col-md-12">
+									<img src="{{asset('uploads/user/'~ user.image)}}" class="user_pic rounded img-raised" alt="User" height="150" width="150">
+									<div class="detail">
+										<div class="u_name">
+											<h4>
+												<strong>{{fiche.patient.nom}}</strong>
+												{{fiche.patient.prenom}}</h4>
+
+										</div>
+										<div></br>
+									</br>
+								</br>
+							</br>
+						</br>
+					</br>
+				</br>
+			</br>
+		</div>
+	</div>
+</div>
+<div class="col-lg-2 col-md-12 user_earnings"></div></div></div><ul class="nav nav-tabs profile_tab"><li class="nav-item">
+<a class="nav-link active" data-toggle="tab" href="#overview">Details</a></li></ul></div><div class="tab-content"><div role="tabpanel" class="tab-pane active" id="overview"><div class="row">
+<div class="col-lg-4 col-md-12">
+	<div class="card">
+		<div class="header">
+			<h2>
+				<strong>Info</strong>
+			</h2>
+
+		</div>
+		<div class="body">
+			<small class="text-muted">Address:
+			</small>
+			<p>{{user.adress}}</p>
+			<hr>
+			<small class="text-muted">Email address:
+			</small>
+			<p>{{user.email}}</p>
+			<hr>
+			<small class="text-muted">Phone:
+			</small>
+			<p>{{user.telephone}}</p>
+			<hr>
+			<small class="text-muted">Birth Date:
+			</small>
+			<p class="m-b-0">{{user.daten|date('d/m/Y')}}</p>
+		</div>
+	</div>
+	<div class="card">
+		<div class="header">
+			<h2>
+				<strong>vos</strong>
+				Documents</h2>
+		</div>
+		{% for d in docs %}
+		<div class="body">
+				<a href="#defaultModal" data-toggle="modal" data-target="#defaultModal{{d.id}}"  >
+					{{d.nom}}
+				</a>
+				</div>
+				<br>
+
+				<div class="modal fade" id="defaultModal{{d.id}}" tabindex="-1" role="dialog"  >
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="title" id="defaultModalLabel">{{d.nom}}</h4>
+							</div>
+							<div class="modal-body">
+								<img src="{{asset('uploads/doc/'~ d.fichier)}}" >
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+		{% endfor %}
+		
+		
+		
+
+		
+		</div>
+	</div>
+</div></div></div></div></div></div>
+
+</section>
+{% endblock %}
