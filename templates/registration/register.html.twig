@@ -1,0 +1,154 @@
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>Sign Up</title>
+<!-- Favicon-->
+<link rel="icon"  type="image/x-icon" href="{{asset('img/dologo_s.png')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
+</head>
+
+<body class="theme-cyan">
+<div class="authentication">
+    <div class="container">
+        <div class="col-md-12 content-center">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 content-center">
+                    <div class="company_detail">
+                        <h4 class="logo1"><img src="assets/images/dologo_light.png" height="70" > </h4>
+                        <h3><strong>DoCare</strong> la ou la santé rencontre la technonogie</h3>
+                        
+                        <div class="footer">
+                            
+                            <hr>
+                            <ul>
+                                
+                                <li><a href="" target="_blank">Acceuil</a></li>
+                                <li><a href="" target="_blank">A propos</a></li>
+                                <li><a href="" target="_blank">Services</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-lg-1 ">
+                </div>
+                <div class="col-lg-6 col-md-12 offset-lg-1">
+                    <div class="card-plain">
+                        <div class="header">
+                            <h5>S'inscrire</h5>
+                            <span>Créer un nouveau compte</span>
+                        </div>
+                            {% for flash_error in app.flashes('verify_email_error') %}
+                              <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                            {% endfor %}
+
+                                
+
+                            {{ form_start(registrationForm, {'attr': {'class': 'form','novalidate':'novalidate'}}) }}
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">                                   
+                                        {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control','placeholder': 'Prenom'}}) }} 
+                                        <span class="text-danger" >{{ form_errors(registrationForm.prenom,{'attr': {'class':'text-danger'}}) }}</span>                            
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">                                   
+                                      {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control','placeholder': 'Nom'}}) }}  
+                                      <span class="text-danger" >{{ form_errors(registrationForm.nom,{'attr': {'class':'text-danger'}}) }}</span>                               
+                                    </div>
+                                </div>
+                           
+                            </div> 
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">                                   
+                                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control ','placeholder': 'Adresse Mail'}}) }}
+                                        <span class="text-danger" >{{ form_errors(registrationForm.email,{'attr': {'class':'text-danger'}}) }}</span>                            
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">                                   
+                                      {{ form_widget(registrationForm.telephone, {'attr': {'class': 'form-control','placeholder': 'Téléphone'}}) }}  
+                                      <span class="text-danger" >{{ form_errors(registrationForm.telephone,{'attr': {'class':'text-danger'}}) }}</span>                           
+                                    </div>
+                                </div>
+                           
+                            </div> 
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">                                   
+                                         {{ form_widget(registrationForm.adress, {'attr': {'class': 'form-control','placeholder': 'Adresse'}}) }}  
+                                         <span class="text-danger" >{{ form_errors(registrationForm.adress,{'attr': {'class':'text-danger'}}) }}</span>                          
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">                                   
+                                     {{ form_widget(registrationForm.daten, {'attr': {'class': 'form-control','placeholder': 'Date de Naissance'}}) }}
+                                     <span class="text-danger" >{{ form_errors(registrationForm.daten,{'attr': {'class':'text-danger'}}) }}</span>                             
+                                    </div>
+                                </div>
+                           
+                            </div> 
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">   
+                                         {{ form_widget(registrationForm.sexe, {'attr': {'class': 'form-control','placeholder': 'sexe ?'}}) }}
+                                         <span class="text-danger" >{{ form_errors(registrationForm.sexe,{'attr': {'class':'text-danger'}}) }}</span>                                      
+                                                                    
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">    
+                                        {{ form_widget(registrationForm.Roles, {'attr': {'class': 'form-control','placeholder': 'qui etes vous'}}) }}
+                                        <span class="text-danger" >{{ form_errors(registrationForm.Roles,{'attr': {'class':'text-danger'}}) }}</span>                         
+                                                                
+                                    </div>
+                                </div>
+                           
+                            </div> 
+                            <div class="form-group">    
+                                                                      
+                                     {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control','placeholder': 'Mot de passe'}}) }}
+                                     <span class="text-danger" >{{ form_errors(registrationForm.plainPassword,{'attr': {'class':'text-danger'}}) }}</span>                        
+                            </div>
+                            <div class="form-group">    
+                                                                      
+                                     {{ form_widget(registrationForm.image, {'attr': {'class': 'form-control','placeholder': ''}}) }}                            
+                            </div>
+                            <div class="checkbox">
+                                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'checkbox'}}) }}
+                                {{ form_label(registrationForm.agreeTerms, 'I read and Agree to the Terms of Usage',{'attr': {'class': 'label contactForm'}} ) }}
+                                <span class="text-danger" >{{ form_errors(registrationForm.agreeTerms,{'attr': {'class':'text-danger'}}) }}</span>
+                            </div>  
+                            
+                            <button type="submit" class="btn btn-primary btn-round btn-block" >S'inscrire</button>
+
+                                     
+                            {{ form_end(registrationForm) }}
+                    
+                        <a class="link" href="login">Vous avez déja un compte ?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery Core Js -->
+<script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script>
+<script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js --> 
+</body>
+</html>
+
+
+
