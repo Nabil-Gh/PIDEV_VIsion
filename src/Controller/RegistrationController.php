@@ -75,16 +75,11 @@ class RegistrationController extends AbstractController
                 // instead of its contents
                 $user->setImage($newFilename); 
             }
+           
 
             $entityManager->persist($user);
             $entityManager->flush();
-            if ($user->getRoles()[0]=='ROLE_MEDECIN'){
-                $idm=$user->getId();
-                
-                return $this->redirectToRoute('register_med',  ['idm' => $idm]);
-            }
-
-            // generate a signed url and email it to the user
+              // generate a signed url and email it to the user
             //$this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
             //    (new TemplatedEmail())
             //        ->from(new Address('nabil.ghazouani@esprit.tn', 'DoCare'))
@@ -92,7 +87,14 @@ class RegistrationController extends AbstractController
             //        ->subject('Please Confirm your Email')
             //        ->htmlTemplate('registration/confirmation_email.html.twig')
             //);
-            // do anything else you need here, like send an email
+             //do anything else you need here, like send an email
+            if ($user->getRoles()[0]=='ROLE_MEDECIN'){
+                $idm=$user->getId();
+                
+                return $this->redirectToRoute('register_med',  ['idm' => $idm]);
+            }
+
+           
 
             return $this->redirectToRoute('home');
         }

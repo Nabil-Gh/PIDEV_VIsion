@@ -78,7 +78,7 @@ class UserController extends AbstractController
         ] );
     }
     #[Route('/admin/user/bloquer/{id}', name: 'bloquer_user')]
-    public function bloquer_user(UserRepository  $repository , $id,Request $request)
+    public function bloquer_user(UserRepository  $repository , $id,Request $request, \Swift_Mailer $mailer)
     {
         $user=$repository->find($id);
         $user->setIsActivated(0);
@@ -89,13 +89,19 @@ class UserController extends AbstractController
         }
         $user->setRoles($rr);
         $em=$this->getDoctrine()->getManager();
-        
+        $message = (new \Swift_Message('DoCare'))
+        ->setFrom('nabil.ghazouani@esprit.tn')
+        ->setTo($user->getEmail())
+        ->setBody(
+            "Mr " . $user->getPrenom(). $user->getNom() . " , Votre email a été bloqué "
+        );
+        $mailer->send($message);
         $em->flush();
         return $this->redirectToRoute('afficher_user');
        
     }
     #[Route('/admin/user/activer/{id}', name: 'activer_user')]
-    public function activer_user(UserRepository  $repository , $id,Request $request)
+    public function activer_user(UserRepository  $repository , $id,Request $request, \Swift_Mailer $mailer)
     {
         $user=$repository->find($id);
         $user->setIsActivated(1);
@@ -103,6 +109,14 @@ class UserController extends AbstractController
         $rr[]= 'ROLE_ACTIVE';
         $user->setRoles($rr);
         $em=$this->getDoctrine()->getManager();
+        $message = (new \Swift_Message('DoCare'))
+        ->setFrom('nabil.ghazouani@esprit.tn')
+        ->setTo($user->getEmail())
+        ->setBody(
+            "Mr " . $user->getPrenom(). $user->getNom() . " , Votre email a été activé avec succée"
+        );
+
+        $mailer->send($message);
         
         $em->flush();
         return $this->redirectToRoute('afficher_user');
