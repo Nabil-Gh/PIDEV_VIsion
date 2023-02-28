@@ -42,17 +42,15 @@ class ProduitsRepository extends ServiceEntityRepository
 //    /**
 //     * @return Produits[] Returns an array of Produits objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   public function findByPrix():array
+   {
+       return $this->createQueryBuilder('p')
+           
+           ->orderBy('p.id', 'DESC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Produits
 //    {

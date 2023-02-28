@@ -4,8 +4,109 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53619c4978cd65befeeb18b8314e4cdf",
+    "content-hash": "95f8c7e9df41ab5e615e27ea957eb212",
     "packages": [
+        {
+            "name": "bacon/bacon-qr-code",
+            "version": "2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "8674e51bb65af933a5ffaf1c308a660387c35c22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/8674e51bb65af933a5ffaf1c308a660387c35c22",
+                "reference": "8674e51bb65af933a5ffaf1c308a660387c35c22",
+                "shasum": ""
+            },
+            "require": {
+                "dasprid/enum": "^1.0.3",
+                "ext-iconv": "*",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "phly/keep-a-changelog": "^2.1",
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "spatie/phpunit-snapshot-assertions": "^4.2.9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "suggest": {
+                "ext-imagick": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BaconQrCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "support": {
+                "issues": "https://github.com/Bacon/BaconQrCode/issues",
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.8"
+            },
+            "time": "2022-12-07T17:46:57+00:00"
+        },
+        {
+            "name": "dasprid/enum",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DASPRiD/Enum.git",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DASPRiD\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP 7.1 enum implementation",
+            "keywords": [
+                "enum",
+                "map"
+            ],
+            "support": {
+                "issues": "https://github.com/DASPRiD/Enum/issues",
+                "source": "https://github.com/DASPRiD/Enum/tree/1.0.3"
+            },
+            "time": "2020-10-02T16:03:48+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "1.14.3",
@@ -1459,6 +1560,212 @@
             "time": "2023-01-14T14:17:03+00:00"
         },
         {
+            "name": "endroid/installer",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/endroid/installer.git",
+                "reference": "86647dd927bb03752ad02e4304ed444342b018e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/endroid/installer/zipball/86647dd927bb03752ad02e4304ed444342b018e4",
+                "reference": "86647dd927bb03752ad02e4304ed444342b018e4",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "composer/composer": "^2.0",
+                "endroid/quality": "dev-master"
+            },
+            "suggest": {
+                "roave/security-advisories": "Avoids installation of package versions with vulnerabilities"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "class": "Endroid\\Installer\\Installer"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Endroid\\Installer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen van den Enden",
+                    "email": "info@endroid.nl"
+                }
+            ],
+            "description": "Composer plugin for installing configuration files",
+            "support": {
+                "issues": "https://github.com/endroid/installer/issues",
+                "source": "https://github.com/endroid/installer/tree/1.4.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/endroid",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-11-26T19:44:46+00:00"
+        },
+        {
+            "name": "endroid/qr-code",
+            "version": "4.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/endroid/qr-code.git",
+                "reference": "652157aee43d919be36cf2100a5a25b0882462f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/652157aee43d919be36cf2100a5a25b0882462f7",
+                "reference": "652157aee43d919be36cf2100a5a25b0882462f7",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "^2.0.5",
+                "php": "^8.0"
+            },
+            "conflict": {
+                "khanamiryan/qrcode-detector-decoder": "^1.0.6"
+            },
+            "require-dev": {
+                "endroid/quality": "dev-master",
+                "ext-gd": "*",
+                "khanamiryan/qrcode-detector-decoder": "^1.0.4||^2.0.2",
+                "setasign/fpdf": "^1.8.2"
+            },
+            "suggest": {
+                "ext-gd": "Enables you to write PNG images",
+                "khanamiryan/qrcode-detector-decoder": "Enables you to use the image validator",
+                "roave/security-advisories": "Makes sure package versions with known security issues are not installed",
+                "setasign/fpdf": "Enables you to use the PDF writer"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Endroid\\QrCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen van den Enden",
+                    "email": "info@endroid.nl"
+                }
+            ],
+            "description": "Endroid QR Code",
+            "homepage": "https://github.com/endroid/qr-code",
+            "keywords": [
+                "code",
+                "endroid",
+                "php",
+                "qr",
+                "qrcode"
+            ],
+            "support": {
+                "issues": "https://github.com/endroid/qr-code/issues",
+                "source": "https://github.com/endroid/qr-code/tree/4.8.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/endroid",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-23T08:56:09+00:00"
+        },
+        {
+            "name": "endroid/qr-code-bundle",
+            "version": "4.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/endroid/qr-code-bundle.git",
+                "reference": "5a1390e1cd393206e1de39b2e7c33c45b7b3ff45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/endroid/qr-code-bundle/zipball/5a1390e1cd393206e1de39b2e7c33c45b7b3ff45",
+                "reference": "5a1390e1cd393206e1de39b2e7c33c45b7b3ff45",
+                "shasum": ""
+            },
+            "require": {
+                "endroid/installer": "^1.2.2",
+                "endroid/qr-code": "^4.8.1",
+                "php": "^8.0",
+                "symfony/framework-bundle": "^5.4||^6.0",
+                "symfony/twig-bundle": "^5.4||^6.0",
+                "symfony/yaml": "^5.4||^6.0"
+            },
+            "require-dev": {
+                "endroid/quality": "dev-master"
+            },
+            "suggest": {
+                "roave/security-advisories": "Avoids installation of package versions with vulnerabilities"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Endroid\\QrCodeBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen van den Enden",
+                    "email": "info@endroid.nl"
+                }
+            ],
+            "description": "Endroid QR Code Bundle",
+            "homepage": "https://github.com/endroid/qr-code-bundle",
+            "keywords": [
+                "bundle",
+                "code",
+                "endroid",
+                "php",
+                "qr",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/endroid/qr-code-bundle/issues",
+                "source": "https://github.com/endroid/qr-code-bundle/tree/4.3.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/endroid",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-23T08:58:08+00:00"
+        },
+        {
             "name": "friendsofphp/proxy-manager-lts",
             "version": "v1.0.14",
             "source": {
@@ -1604,6 +1911,67 @@
             "time": "2022-12-08T02:08:23+00:00"
         },
         {
+            "name": "laminas/laminas-json",
+            "version": "3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-json.git",
+                "reference": "7a8a1d7bf2d05dd6c1fbd7c0868d3848cf2b57ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-json/zipball/7a8a1d7bf2d05dd6c1fbd7c0868d3848cf2b57ec",
+                "reference": "7a8a1d7bf2d05dd6c1fbd7c0868d3848cf2b57ec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "conflict": {
+                "zendframework/zend-json": "*"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~2.4.0",
+                "laminas/laminas-stdlib": "^2.7.7 || ^3.1",
+                "phpunit/phpunit": "^9.5.25"
+            },
+            "suggest": {
+                "laminas/laminas-json-server": "For implementing JSON-RPC servers",
+                "laminas/laminas-xml2json": "For converting XML documents to JSON"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Json\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "json",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-json/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-json/issues",
+                "rss": "https://github.com/laminas/laminas-json/releases.atom",
+                "source": "https://github.com/laminas/laminas-json"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-10-17T04:06:45+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.9.1",
             "source": {
@@ -1704,6 +2072,73 @@
                 }
             ],
             "time": "2023-02-06T13:44:46+00:00"
+        },
+        {
+            "name": "ob/highcharts-bundle",
+            "version": "1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marcaube/ObHighchartsBundle.git",
+                "reference": "7faa0a48aa8255ff047b2ff76ead6222bfffc2da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marcaube/ObHighchartsBundle/zipball/7faa0a48aa8255ff047b2ff76ead6222bfffc2da",
+                "reference": "7faa0a48aa8255ff047b2ff76ead6222bfffc2da",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-json": "^3.1",
+                "php": "^7.2",
+                "symfony/config": "^4.4 || ^5.0",
+                "symfony/dependency-injection": "^4.4 || ^5.0",
+                "symfony/http-kernel": "^4.4 || ^5.0",
+                "symfony/yaml": "^4.4 || ^5.0",
+                "twig/twig": "^2.10 || ^3.0"
+            },
+            "require-dev": {
+                "nyholm/symfony-bundle-test": "^1.6.1",
+                "symfony/framework-bundle": "^4.4 || ^5.0",
+                "symfony/phpunit-bridge": "^4.4 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ob\\HighchartsBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Aubé"
+                }
+            ],
+            "description": "Symfony Bundle that ease the use of highcharts to display rich graph and charts in your app",
+            "homepage": "https://github.com/marcaube/ObHighchartsBundle",
+            "keywords": [
+                "chart",
+                "charting",
+                "charts",
+                "graph",
+                "graphs",
+                "highcharts",
+                "marcaube",
+                "ob",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/marcaube/ObHighchartsBundle/issues",
+                "source": "https://github.com/marcaube/ObHighchartsBundle/tree/1.7"
+            },
+            "time": "2020-01-12T16:22:18+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

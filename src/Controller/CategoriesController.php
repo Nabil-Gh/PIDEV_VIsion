@@ -3,6 +3,8 @@
 namespace App\Controller;
 use App\Entity\Categories;
 use App\Form\CategoriesFormType;
+use Ob\HighchartsBundle\Highcharts\Highchart;
+
 use App\Repository\CategoriesRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,8 +43,42 @@ class CategoriesController extends AbstractController
     #[Route('/afficher_categories', name: 'afficher_categories')]
 
     function Affiche(CategoriesRepository $repository){
+
+
+        $ob = new Highchart();
+        $ob->chart->renderTo('piechart');
+        $ob->title->text('stat categorie');
+        $ob->plotOptions->pie(array(
+            'allowPointSelect' => true,
+            'cursor' => 'pointer',
+            'dataLabels' => array('enabled' => false),
+            'showInLegend' => true
+        ));
+
         $categories= $repository->findAll();
-        return $this->render('categories/afficher_categories.html.twig',['categories'=>$categories]);
+
+        $data2=[];
+        $categNom=[];
+        $categCount=[];
+        $somme=0;
+        $compt[]=0;
+
+        foreach($categories as $categorie){
+            $categNom[] = $categorie->getNom();
+            $categCount[] = $repository->getproduits();
+
+
+        }
+        $i=0;
+        foreach($categNom as $p)
+        {
+            array_push($data2,[$categNom[$i],$categCount[0][$i]['num']]);
+            $i++;
+        }
+        $ob->series(array(array('type' => 'pie','name' => 'Nombre de produits', 'data' => $data2)));
+
+
+        return $this->render('categories/afficher_categories.html.twig',['categories'=>$categories, 'chart' => $ob]);
     }
     #[Route('/update_categories/{{id}}', name: 'update_categories')]
  

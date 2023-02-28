@@ -1,194 +1,376 @@
-{% extends "base.html.twig" %} 
-{% block title %}produit{% endblock %}  
+{% extends "base.html.twig" %}
+{% block title %}produit
+{% endblock %}
 {% block body %}
-<link href="{{asset('css/master.css')}}" rel="stylesheet">
-<link href="{{asset('css/shop.css')}}" rel="stylesheet">
-<script src="{{asset('js/custom.js')}}"></script>
+	<link href="{{asset('css/master.css')}}" rel="stylesheet">
+	<link href="{{asset('css/shop.css')}}" rel="stylesheet">
+	<script src="{{asset('js/custom.js')}}"></script>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-
-        <aside class="sidebar">
-          <div class="widget widget-search">
-            <form method="get" class="form-search clearfix" id="search-global-form">
-              <input class="form-search__input" type="text" name="" id="search2" placeholder="Search Product / Medicine ...">
-              <button class="form-search__submit" type="submit"><i class="icon icon-magnifier"></i></button>
-            </form>
-          </div><!-- end widget-search -->
-
-          <div class="widget widget-category">
-            <h3 class="widget-title">categories</h3>
-            <div class="block_content">
-              <ul class="list-categories list-categories_widget">
-                          {% for c in categories %}
-
-                <li><a href="javascript:void(0);"><span class="list-categories__name">{{c.nom}}</span><span class="list-categories__amout color_primary">15</span></a></li>
-               {% endfor %}
-
-              </ul>
-            </div>
-          </div><!-- end widget-category -->
+	<script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>
 
 
-          <div class="widget widget-price">
-            <h3 class="widget-title">Filter by price</h3>
-            <div id="slider-price"></div>
-            <div class="widget-price__title">
-              <strong>Price From:</strong>
-              <input class="widget-price__input" id="slider-price_min">
-              to
-              <input class="widget-price__input" id="slider-price_max">
-            </div>
-          </div><!-- end widget-price -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+
+				<aside class="sidebar">
+					<div class="widget widget-search">
+						<form method="get" class="form-search clearfix" id="search-global-form">
+							<input class="form-search__input" type="text" name="" id="search2" placeholder="Search Product / Medicine ...">
+							<button class="form-search__submit" type="submit">
+								<i class="icon icon-magnifier"></i>
+							</button>
+						</form>
+					</div>
+					<!-- end widget-search -->
+
+					<div class="widget widget-category">
+						<h3 class="widget-title">categories</h3>
+						<div class="cart-icon">
+							<i class="fas fa-shopping-cart"></i>
+							<span class="item-count">0</span>
+						</div>
+						<div class="cart-modal">
+							<div class="modal-content">
+								<button class="close-modal">Close</button>
+                
+								<div class="cart-items">
+									{% for p in dataPanier %}
+										<div class="cart-item ">
+											<div class="cart-item-details ">
+												<img src="{{asset('uploads/produit/'~ p.produit.image)}}" height ="30%" width="30%" alt="Goods">
+												<h4>{{ p.produit.libelle }}</h4>
+												<p>{{ p.produit.prix }}€</p>
+											</div>
+										</div>
+										<div class="cart-item-buttons">
+											<a  href=" {{ path ('add', {'id': p.produit.id})}}" class="btn btn-success mr-4">
+												Add one item
+											</a>
+											<a  href="{{ path ('remove', {'id': p.produit.id})}}" class="btn btn-warning">
+												Remove one item
+											</a>
+											<a  href="{{ path ('delete', {'id': p.produit.id})}}" class="btn btn-danger " style="margin-right:20px; ">
+												Delete
+											</a>
+										</div>
+									{% else %}
+										<div class="text-center">Votre panier est vide
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						<style>
+							/* Cart Icon Styles */
+							.cart-icon {
+								position: relative;
+								display: inline-block;
+								cursor: pointer;
+							}
+							.cart-icon i {
+								font-size: 24px;
+							}
+							.cart-count {
+								position: absolute;
+								top: -10px;
+								right: -10px;
+								background-color: red;
+								color: white;
+								border-radius: 50%;
+								padding: 4px 8px;
+								font-size: 12px;
+							}
+
+							/* Cart Modal Styles */
+							.cart-modal {
+								position: fixed;
+								top: 50%;
+								left: 50%;
+								transform: translate(-50%, -50%);
+								background-color: white;
+								padding: 20px;
+								z-index: 9999;
+								display: none;
+							}
+							.cart-modal .cart-items {
+								display: flex;
+								flex-wrap: wrap;
+							}
+							.cart-modal .cart-item {
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								margin-bottom: 10px;
+								border-bottom: 1px solid gray;
+								padding-bottom: 10px;
+							}
+							.cart-modal .cart-item img {
+								max-width: 80px;
+                max-height: 200px;
+								margin-right: 10px;
+							}
+							.cart-modal .cart-item-buttons button {
+								margin-left: 10px;
+							}
+
+							/* Show/Hide Cart Modal */
+							.show-cart-modal {
+								display: block;
+							}
+						</style>
+						<script>
+							// Show Cart Modal on Cart Icon Click
+$('.cart-icon').click(function () {
+$('.cart-modal').addClass('show-cart-modal');
+});
+
+// Hide Cart Modal on Close Button Click
+$('.close-modal').click(function () {
+$('.cart-modal').removeClass('show-cart-modal');
+});
+
+// Add/Remove Item from Cart
+$('.add-to-cart').click(function () {
+// Add item to cart
+// Update cart count
+});
+$('.remove-item').click(function () {
+// Remove item from cart
+// Update cart count
+});
+
+// Increase/Decrease Item Quantity
+$('.increase-quantity').click(function () {
+// Increase item quantity
+// Update cart count
+});
+$('.decrease-quantity').click(function () {
+// Decrease item quantity
+// Update cart count
+});
+						</script>
+						<div class="block_content">
+							<ul class="list-categories list-categories_widget">
+								{% for c in categories %}
+
+									<li>
+										<a href="javascript:void(0);">
+											<span class="list-categories__name">{{c.nom}}</span>
+											<span class="list-categories__amout color_primary">15</span>
+										</a>
+									</li>
+								{% endfor %}
+
+							</ul>
+						</div>
+					</div>
+					<!-- end widget-category -->
 
 
-          <div class="widget widget-top">
-            <h3 class="widget-title">TOP rated Products</h3>
-            <ul class="list-top unstyled">
-              <li class="list-top__item">
-                <div class="list-top__foto helper">
-                  <img src="media/top-products/1.jpg" height="68" width="53" alt="Product">
-                </div>
-                <div class="list-top__inner">
-                  <span class="list-top__info">Curabitur id lectus mae enas non diam</span>
-                  <div class="product-rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                </div>
-              </li>
-              <li class="list-top__item">
-                <div class="list-top__foto helper">
-                  <img src="front/media/top-products/2.jpg" height="61" width="63" alt="Product">
-                </div>
-                <div class="list-top__inner">
-                  <span class="list-top__info">Curabitur id lectus mae enas non diam</span>
-                  <div class="front/product-rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
-                </div>
-              </li>
-              <li class="list-top__item">
-                <div class="list-top__foto helper">
-                  <img src="front/media/top-products/3.jpg" height="67" width="48" alt="Product">
-                </div>
-                <div class="list-top__inner">
-                  <span class="list-top__info">Curabitur id lectus mae enas non diam</span>
-                  <div class="product-rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                </div>
-              </li>
-            </ul>
-          </div><!-- end widget-top -->
+					<div class="widget widget-price">
+						<h3 class="widget-title">Filter by price</h3>
+						<div id="slider-price"></div>
+						<div class="widget-price__title">
+							<strong>Price From:</strong>
+							<input class="widget-price__input" id="slider-price_min">
+							to
+							<input class="widget-price__input" id="slider-price_max">
+						</div>
+					</div>
+					<!-- end widget-price -->
 
 
-          
+					<div class="widget widget-top">
+						<h3 class="widget-title">TOP rated Products</h3>
+						<ul class="list-top unstyled">
+							<li class="list-top__item">
+								<div class="list-top__foto helper">
+									<img src="media/top-products/1.jpg" height="68" width="53" alt="Product">
+								</div>
+								<div class="list-top__inner">
+									<span class="list-top__info">Curabitur id lectus mae enas non diam</span>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								</div>
+							</li>
+							<li class="list-top__item">
+								<div class="list-top__foto helper">
+									<img src="front/media/top-products/2.jpg" height="61" width="63" alt="Product">
+								</div>
+								<div class="list-top__inner">
+									<span class="list-top__info">Curabitur id lectus mae enas non diam</span>
+									<div class="front/product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								</div>
+							</li>
+							<li class="list-top__item">
+								<div class="list-top__foto helper">
+									<img src="front/media/top-products/3.jpg" height="67" width="48" alt="Product">
+								</div>
+								<div class="list-top__inner">
+									<span class="list-top__info">Curabitur id lectus mae enas non diam</span>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- end widget-top -->
 
 
-          <div class="widget widget-last">
-            <h3 class="widget-title">Last viewed</h3>
-            <ul class="list-top unstyled">
-              <li class="list-top__item">
-                <div class="list-top__foto helper">
-                  <img src="front/media/top-products/4.jpg" height="66" width="39" alt="Product">
-                </div>
-                <div class="list-top__inner">
-                  <span class="list-top__info">Curabitur id lectus mae enas non diam</span>
-                  <div class="product-rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                </div>
-              </li>
-              <li class="list-top__item">
-                <div class="list-top__foto helper">
-                  <img src="front/media/top-products/5.jpg" height="61" width="54" alt="Product">
-                </div>
-                <div class="list-top__inner">
-                  <span class="list-top__info">Curabitur id lectus mae enas non diam</span>
-                  <div class="product-rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
-                </div>
-              </li>
-              <li class="list-top__item">
-                <div class="list-top__foto helper">
-                  <img src="front/media/top-products/6.jpg" height="72" width="67" alt="Product">
-                </div>
-                <div class="list-top__inner">
-                  <span class="list-top__info">Curabitur id lectus mae enas non diam</span>
-                  <div class="product-rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                </div>
-              </li>
-            </ul>
-          </div><!-- end widget-last -->
+					<div class="widget widget-last">
+						<h3 class="widget-title">Last viewed</h3>
+						<ul class="list-top unstyled">
+							<li class="list-top__item">
+								<div class="list-top__foto helper">
+									<img src="front/media/top-products/4.jpg" height="66" width="39" alt="Product">
+								</div>
+								<div class="list-top__inner">
+									<span class="list-top__info">Curabitur id lectus mae enas non diam</span>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								</div>
+							</li>
+							<li class="list-top__item">
+								<div class="list-top__foto helper">
+									<img src="front/media/top-products/5.jpg" height="61" width="54" alt="Product">
+								</div>
+								<div class="list-top__inner">
+									<span class="list-top__info">Curabitur id lectus mae enas non diam</span>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								</div>
+							</li>
+							<li class="list-top__item">
+								<div class="list-top__foto helper">
+									<img src="front/media/top-products/6.jpg" height="72" width="67" alt="Product">
+								</div>
+								<div class="list-top__inner">
+									<span class="list-top__info">Curabitur id lectus mae enas non diam</span>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- end widget-last -->
 
-        </aside><!-- end sidebar -->
-      </div><!-- end col -->
-
-
-      <div class="col-md-9">
-        <main class="main-content">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="sorting-title">
-                Sort By:
-                <div role="select" class="jelect">
-                  <input id="jelect" name="tool" value="0" data-text="imagemin" type="text" class="jelect-input">
-                  <div tabindex="0" role="button" class="jelect-current">Select Your Department</div>
-                  <ul class="jelect-options">
-                    <li data-val='0' tabindex="0" role="option" class="jelect-option jelect-option_state_active">Department 1</li>
-                    <li data-val='1' tabindex="0" role="option" class="jelect-option">Department 2</li>
-                    <li data-val='2' tabindex="0" role="option" class="jelect-option">Department 3</li>
-                  </ul>
-                </div>
-              </div><!-- end sorting-title -->
-            </div><!-- end col -->
-          </div><!-- end row -->
-
-
-          <ul class="products">
-                      {% for p in produits %}
-
-            <li class="products__item wow bounceInRight" data-wow-delay=".5s">
-              <a class="products__foto helper" href="shop-product.html">
-                <img src="{{asset('uploads/produit/'~ p.image)}}" height="226" width="226" alt="Goods">
-              </a>
-              <h4 class="products__name"><a href="shop-product.html">{{p.libelle}}</a><i class="icon icon-heart"></i></h4>
-              <div class="products__info ui-text">{{p.description}}</div>
-              <div class="price-block clearfix">
-                <span class="price-block__discount">-20%</span>
-                <span class="price-block__price">${{p.prix}}</span>
-              </div>
-              <div class="products__btn text-center">
-                <button class="btn"><i class="icon icon-basket-loaded"></i> Add to cart</button>
-              </div>
-              <span class="products__label">SALE</span>
-            </li>
-            {% endfor %}
+				</aside>
+				<!-- end sidebar -->
+			</div>
+			<!-- end col -->
 
 
-            
-
-            
-
-            
-
-           
-
-            
-
-           
-
-            
-
-            
-          </ul><!-- end products -->
-
-          <div class="text-center">
-            <ul class="pagination">
-              <li><a href="javascript:void(0);">Previous</a></li>
-              <li><a href="javascript:void(0);">1</a></li>
-              <li><a href="javascript:void(0);">2</a></li>
-              <li><a href="javascript:void(0);">3</a></li>
-              <li><a href="javascript:void(0);">Next</a></li>
-            </ul>
-          </div>
-        </main>
-      </div><!-- end col -->
-    </div><!-- end row -->
-  </div><!-- end container -->
+			<div class="col-md-9">
+				<main class="main-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="sorting-title">
+								Sort By:
+								<div role="select" class="jelect">
+									<input id="jelect" name="tool" value="0" data-text="imagemin" type="text" class="jelect-input">
+									<div tabindex="0" role="button" class="jelect-current">Select Your Department</div>
+									<ul class="jelect-options">
+										<li data-val='0' tabindex="0" role="option" class="jelect-option jelect-option_state_active">Department 1</li>
+										<li data-val='1' tabindex="0" role="option" class="jelect-option">Department 2</li>
+										<li data-val='2' tabindex="0" role="option" class="jelect-option">Department 3</li>
+									</ul>
+								</div>
+							</div>
+							<!-- end sorting-title -->
+						</div>
+						<!-- end col -->
+					</div>
+					<!-- end row -->
 
 
- 
+					<ul class="products">
+						{% for p in produits %}
+
+							<li class="products__item wow bounceInRight" data-wow-delay=".5s">
+								<a class="products__foto helper" href="shop-product.html">
+									<img src="{{asset('uploads/produit/'~ p.image)}}" height="226" width="226" alt="Goods">
+								</a>
+								<h4 class="products__name">
+									<a href="shop-product.html">{{p.libelle}}</a>
+									<i class="icon icon-heart"></i>
+								</h4>
+								<div class="products__info ui-text">{{p.description}}</div>
+								<div class="price-block clearfix">
+									<span class="price-block__discount">-20%</span>
+									<span class="price-block__price">${{p.prix}}</span>
+								</div>
+								<div class="products__btn text-center">
+									<a class="btn" href="{{ path ('add',{'id':p.id})}}">
+										Add to cart</a>
+									<a class="btn" href="{{ path ('afficher_produits_front_details',{'id':p.id}) }}">
+										details</a>
+								</div>
+								<span class="products__label">SALE</span>
+							</li>
+						{% endfor %}
+
+
+					</ul>
+					<!-- end products -->
+
+					<div class="text-center">
+						<ul class="pagination">
+							<li>
+								<a href="javascript:void(0);">Previous</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);">1</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);">2</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);">3</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);">Next</a>
+							</li>
+						</ul>
+					</div>
+				</main>
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end container -->
+
+
 {% endblock %}

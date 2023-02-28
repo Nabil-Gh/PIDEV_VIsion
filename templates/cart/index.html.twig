@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block body %}
+    <section class="bg-light p-3">
+        <h1>Votre panier</h1>
+    </section>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in dataPanier %}
+                <tr>
+                    <td>{{ p.produit.libelle }}</td>
+                    <td class="text-end">{{ p.produit.prix }} €</td>
+                    <td>{{ p.produit.description }}</td>
+                    <td class="text-end">{{ p.produit.prix }} €</td>
+                    <td>
+                        <a href=" {{ path ('add', {'id': p.produit.id})}}" class="btn btn-success">
+                            Add one item
+                        </a>
+                        <a href="{{ path ('remove', {'id': p.produit.id})}}" class="btn btn-warning">
+                            Remove one item 
+                        </a>
+                        <a href="{{ path ('delete', {'id': p.produit.id})}}" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Votre panier est vide</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total</td>
+                <td class="text-end">{{ total }} €</td>
+                <td>
+                    <a href="{{ path ('delete_all')}}" class="btn btn-danger">
+                        Delete all
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    
+{% endblock %}

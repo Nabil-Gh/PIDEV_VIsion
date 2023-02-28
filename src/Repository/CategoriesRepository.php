@@ -39,6 +39,24 @@ class CategoriesRepository extends ServiceEntityRepository
         }
     }
 
+
+    function  getproduits()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql='
+
+
+        SELECT
+COUNT(produits.type_id) as num
+FROM categories LEFT JOIN produits ON (categories.id=produits.type_id)
+GROUP BY ( categories.id) ;
+  ';
+        $stmt = $conn->prepare($sql);
+        return $stmt->executeQuery()->fetchAllAssociative();
+
+    }
+
 //    /**
 //     * @return Categories[] Returns an array of Categories objects
 //     */

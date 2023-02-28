@@ -34,6 +34,9 @@
     <link href="{{asset('front/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('front/css/responsive.css')}}" rel="stylesheet" />
     <script src="{{asset('https://kit.fontawesome.com/7e76930a12.js')}}" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-KB8NtQwFtN+0uybCXnv1JcY/ogAVCkjkjM9+o5Pm8AaHbdFWl5I5KN5fCv5YJLK3m+edLk/V9KO5g5ut5+Z0Lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-/Gd2zEnASt2/KGv6IzU6I9RLlK9GAdeGevUOm9a8H2k+G83tY6TqE2mZsfkedeOR" crossorigin="anonymous"></script>
+
     <!-- ========== End Stylesheet ========== -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -45,6 +48,8 @@
 
     <!-- ========== Google Fonts ========== -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </head>
   <!-- Loader Landing Page
@@ -104,6 +109,10 @@
                                     <span>Office Hours</span> Sat - Wed : 8:00 - 4:00
                                 </div> 
                             </li>
+                           
+             
+                                <!-- Cart Icon -->
+
                         </ul>
                     </div>
                 </div>
@@ -152,7 +161,7 @@
                                 </li>
         
                                 <li>
-                                    <a href="produits.html">Produits</a>
+                                    <a href="{{path('afficher_produits_front')}}">Produits</a>
                                 </li>        
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Blog</a>
@@ -164,6 +173,7 @@
                                 <li>
                                     <a href="contact.html">contact</a>
                                 </li>
+                                
                             </ul>
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                            

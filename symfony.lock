@@ -38,6 +38,12 @@
             "./migrations/.gitignore"
         ]
     },
+    "endroid/qr-code-bundle": {
+        "version": "4.3.1"
+    },
+    "ob/highcharts-bundle": {
+        "version": "1.7"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {

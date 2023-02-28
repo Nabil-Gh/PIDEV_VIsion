@@ -30,9 +30,24 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2><strong>LISTE</strong> PRODUITS </h2>
                         
+                         
+                        <h2><strong>Basic Table</strong> <small>Basic example without any additional modification classes</small> </h2>
+                        <ul class="header-dropdown">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                   
+									<li><a href="javascript:void(0);" class="boxs-close">Delete</a></li>
+                                    <li><a href="{{ path ('afficher_produits_tri')}}" class="boxs-close">trier par prix</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
+                           
+              
+
+              
+                    
                     <div class="body">
                             <table class="table table-bordered table-striped table-hover ">
                                 <thead>
@@ -76,7 +91,7 @@
                             </td>
 
                             <td><a href="{{ path('update_produits',{'id':c.id}) }}" class="btn btn-raised btn-primary btn-round waves-effect"> Update</a> </td>
-
+                             
 
 
 

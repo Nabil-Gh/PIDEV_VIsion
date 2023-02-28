@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Read More{% endblock %}
+
+
+{% block body %}
+
+
+ <!-- Start Blog
+    ============================================= -->
+    <div class="blog-area single full-blog full-blog default-padding">
+        <div class="container">
+            <div class="blog-items">
+                <div class="row">
+                    <div class="blog-content col-lg-5 offset-lg-4 col-md-12">
+                        <div class="single-item">
+
+                            <div class="blog-item-box">
+                                <div class="item">
+                                   
+                                    <!-- Start Post Thumb -->
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="{{asset('uploads/produit/'~ c.image)}}" alt="Thumb">
+                                        </a>
+                                    </div>
+                                    <!-- Start Post Thumb -->
+
+                                    <div class="info">
+                                        <span class="date">
+                                            12 Aug
+                                        </span>
+                                        <div class="meta">
+                                            <ul>
+                                                <li>
+                                                    <i class="fas fa-user"></i>
+                                                    
+                                                </li>
+                                                <li>
+                                                   
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <h3>{{c.libelle}}</h3>
+                                         <h3>{{c.description}}</h3>
+                                          <h3>{{c.prix}}</h3>
+                                           
+                                        <p>
+                                           {{c.description}}
+                                        </p>
+                                       
+                                        
+                                        <!-- Start Post Pagination -->
+                                        <div class="post-pagi-area">
+                                            <a href="#"><i class="fas fa-angle-double-left"></i>Précedent</a>
+                                            <a href="#">Suivant<i class="fas fa-angle-double-right"></i></a>
+                                        </div>
+                                        <!-- End Post Pagination -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog -->
+    
+
+
+{% endblock %}

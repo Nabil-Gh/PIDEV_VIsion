@@ -9,6 +9,7 @@ use App\Form\ProduitsFormType;
 
 use App\Repository\ProduitsRepository;
 use App\Repository\CategoriesRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,7 +99,7 @@ class ProduitsController extends AbstractController
     }
 
      /**
-   
+     * @param $id
      * @param ProduitsRepository $rep
      * @route ("/delete_produits/{id}", name="delete_produits")
      */
@@ -113,11 +114,45 @@ class ProduitsController extends AbstractController
 
     #[Route('/afficher_produits_front', name: 'afficher_produits_front')]
 
-    function Affiche_front(ProduitsRepository $repository,CategoriesRepository $repo){
+    function Affiche_front(ProduitsRepository $repository,CategoriesRepository $repo, SessionInterface $session){
         $produits= $repository->findAll();
         $categories=$repo->findAll();
-        return $this->render('produits/afficher_produits_front.html.twig',['produits'=>$produits,'categories'=>$categories]);
+
+        $panier = $session->get("panier", []);
+
+        // On "fabrique" les données
+        $dataPanier = [];
+        $total = 0;
+
+        foreach($panier as $id => $quantite){
+            $Produits = $repository->find($id);
+            $dataPanier[] = [
+                "produit" => $Produits,
+                "quantite" => $quantite
+            ];
+            $total += $Produits->getPrix() * $quantite;
+        }
+        return $this->render('produits/afficher_produits_front.html.twig',compact('categories','produits',"dataPanier", "total"));
+    }
+    
+    #[Route('/afficher_produits_front/{id}', name: 'afficher_produits_front_details')]
+
+    function Affiche_frontdetails(ProduitsRepository $repository,CategoriesRepository $repo,$id){
+        $produits= $repository->find($id);
+       
+        return $this->render('produits details.html.twig',['c'=>$produits,]);
     }
 
+    #[Route('/afficher_produits_tri', name: 'afficher_produits_tri')]
+
+    function AfficheTri(ProduitsRepository $repository){
+        $produits= $repository->findAll();
+        $pr= $repository->findByPrix($produits);
+        return $this->render('produits/afficher_produits.html.twig',['produits'=>$pr]);
+    }
+   
 
 }
+
+
+

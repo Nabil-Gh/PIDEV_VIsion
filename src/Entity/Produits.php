@@ -5,11 +5,9 @@ namespace App\Entity;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
-#[UniqueEntity('libelle')]
 class Produits
 {
     #[ORM\Id]
