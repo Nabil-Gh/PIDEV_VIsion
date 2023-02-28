@@ -18,16 +18,8 @@ class RendezVous
 
     
     #[ORM\Column(type: 'datetime_immutable')]
-    
     #[Assert\NotBlank(message:"ce champs ne peut pas etre vide")]
     private ?\DateTimeInterface $date_rv = null;
-
- 
-    
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"ce champs ne peut pas etre vide")]
-    private ?string $heure_rv = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"ce champs ne peut pas etre vide")]
@@ -56,22 +48,6 @@ class RendezVous
     public function setDateRv(\DateTimeInterface $date_rv): self
     {
         $this->date_rv = $date_rv;
-
-        return $this;
-    }
-
-    
-
-   
-
-    public function getHeureRv(): ?string
-    {
-        return $this->heure_rv;
-    }
-
-    public function setHeureRv(string $heure_rv): self
-    {
-        $this->heure_rv = $heure_rv;
 
         return $this;
     }

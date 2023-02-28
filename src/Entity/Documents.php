@@ -17,21 +17,16 @@ class Documents
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"ce champs ne peut pas etre vide")]
     private ?string $fichier = null;
 
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    
     #[ORM\ManyToOne(inversedBy: 'docs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?FicheMedicale $fiche = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-
-
     #[Assert\Length(min:3,minMessage:"il faut un Minimum de 3 lettres")]
-    
      private ?string $nom = null;
 
     public function getId(): ?int

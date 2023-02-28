@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\RendezVous;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<RendezVous>
@@ -16,9 +17,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RendezVousRepository extends ServiceEntityRepository
 {
+    private $entityManager;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, RendezVous::class);
+        
     }
 
     public function save(RendezVous $entity, bool $flush = false): void
@@ -42,17 +46,29 @@ class RendezVousRepository extends ServiceEntityRepository
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByHour($value):array
+    {
+        return $this->createQueryBuilder('r')
+        ->andWhere('r.med = :val')
+        ->setParameter('val', $value)
+        ->orderBy('r.date_rv', 'ASC')
+        ->addOrderBy('r.heure_rv', 'ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    public function findByuser($value) 
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.med = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
 
 //    public function findOneBySomeField($value): ?RendezVous
 //    {
@@ -63,4 +79,24 @@ class RendezVousRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+
+
+
+
+public function findByMedecinOrPatient($search)
+    {
+        return $this->createQueryBuilder('rv')
+                    ->innerJoin(User::class, 'med', 'WITH', 'rv.med = med.id')
+                    ->innerJoin(User::class, 'patient', 'WITH', 'rv.patient = patient.id')
+                    ->where('med.nom LIKE :nom OR med.prenom LIKE :nom ')
+                    ->orWhere('patient.nom LIKE :nom OR patient.prenom LIKE :nom ')
+                    ->setParameter('nom','%'.$search.'%')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+
 }

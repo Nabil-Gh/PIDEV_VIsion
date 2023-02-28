@@ -30,7 +30,6 @@
                                 <div class="col-lg-6 info">
                                     <h4>{{ r.med.nom }} {{r.med.prenom}}</h4>
                                     <span>{{r.daterv|date('d/m/Y')}}</span>
-                                    <h5>Heure du rendez-vous : <strong> <span>{{r.heurerv}}</span></strong></h5>
                                     <div class="bottom">
                                     <a href="{{ path ('updatefr',{'id':r.id}) }}" class="btn circle btn-sm btn-gradient">report</a>
                                      <a href="{{ path ('removefr',{'id':r.id}) }}" class="btn circle btn-sm btn-gradient">supp</a>    

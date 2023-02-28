@@ -5,6 +5,7 @@ use App\Form\UpdateType;
 use App\Form\RendezVousType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\RendezVous;
@@ -19,20 +20,34 @@ class RendezVousController extends AbstractController
 {
 
     #[Route('/rendez_vous/afficherback', name: 'afficherrv')]
-    public function afficherback(RendezVousRepository $repo,UserRepository $rp): Response
+    public function afficherback(RendezVousRepository $repo,UserRepository $rp)
     {
+        $rv=$repo->findAll();
 
-        $rendezvous = $repo->findAll();
+
+        foreach ($rv as $event)
+        {
+            $rdvs[]=[
+                'title'=>$event->getPatient()->getNom(),
+                'start'=>$event->getDateRv()->format("Y-m-d H:i:s"),
+                'end'=>$event->getDateRv()->modify("+2 hours")->format("Y-m-d H:i:s"),
+                'backgroundColor'=> '#0ec51',
+                'borderColor'=> 'green',
+                'textColor' => 'black'
+            ];
+        }
+        $data = json_encode($rdvs);
         return $this->render('rendez_vous/afficherrv.html.twig', [
-            'rdv' => $rendezvous,
+            'rdv' => $rv,
+            'data'=>$data
         ]);
     }
 
     #[Route('/rendez_vous/addfront', name: 'add_rv')]
     public function addfront(ManagerRegistry $doctrine,Request $request,UserRepository $rp): Response
     {
-        $user=$rp->find(31);
-        $med=$rp->find(11);
+        $user=$rp->find(32);
+        $med=$rp->find(23);
         $em = $doctrine->getManager();
         $rendezvous = new RendezVous();
         $form = $this->createForm(RendezVousType::class, $rendezvous);
@@ -57,7 +72,7 @@ class RendezVousController extends AbstractController
         $rendezvous = $doctrine->getRepository(RendezVous::class)->find($id);
         $form = $this->createForm(UpdateType::class, $rendezvous);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
           
             $em->flush();
             return $this->redirectToRoute('afficherrv');
@@ -79,9 +94,10 @@ class RendezVousController extends AbstractController
 
 
     #[Route('rendez_vous/afficherfront', name: 'afficherfr')]
-    public function afficherfront(RendezVousRepository $repo): Response
+    public function afficherfront(RendezVousRepository $repo,UserRepository $rp): Response
     {
-        $rendezvous = $repo->findAll();
+        $user=$rp->find(23);
+        $rendezvous = $repo->findbyUser($user);
         return $this->render('rendez_vous/afficherrvfront.html.twig', [
             'rdv' => $rendezvous,
         ]);
@@ -94,7 +110,7 @@ class RendezVousController extends AbstractController
         $rendezvous = $doctrine->getRepository(RendezVous::class)->find($id);
         $form = $this->createForm(UpdateType::class, $rendezvous);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             return $this->redirectToRoute('afficherfr');
         }
@@ -113,6 +129,23 @@ class RendezVousController extends AbstractController
         return $this->redirectToRoute('afficherfr');
     }
 
-
-
+    #[Route('/searchuserajax', name:'ajaxuser')]
+     
+    public function searchajax(Request $request ,RendezVousRepository $repository)
+    {
+        $repository = $this->getDoctrine()->getRepository(RendezVous::class);
+        $requestString=$request->get('searchValue');
+        $Users = $repository->findByMedecinOrPatient($requestString);
+        
+        
+        return $this->render('rendez_vous/ajax.html.twig', [
+            "rdv"=>$Users,
+        ]);
+    }
 }
+
+    
+
+
+
+

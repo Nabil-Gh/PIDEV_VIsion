@@ -64,7 +64,7 @@ class DocumentsController extends AbstractController
         $user=$rp->find(31);
         $fichemedicale=$rep->findByuser($user);
         
-        $Docs = $repo->findbyFiche($fichemedicale);
+        $Docs = $repo->findbyFiche($fichemedicale[0]);
         
         return $this->render('documents/afficherdoc.html.twig', [
             'docs' => $Docs,'fiche'=>$fichemedicale[0],
@@ -90,7 +90,6 @@ class DocumentsController extends AbstractController
         $form = $this->createForm(UpdatedocType::class, $doc);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-          
             $em->flush();
             return $this->redirectToRoute('afficherdfr');
         }

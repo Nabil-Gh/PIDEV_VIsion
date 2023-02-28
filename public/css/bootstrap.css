@@ -5006,7 +5006,7 @@ button.close {
 	position: relative;
 }
 .modal-backdrop {
-	position: absolute;
+	position: auto;
 	top: 0;
 	right: 0;
 	left: 0;

@@ -11,8 +11,8 @@
                     <h2>Basic Elements</h2>
                     <ul class="breadcrumb padding-0">
                         <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Basic Elements</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">admin</a></li>
+                        <li class="breadcrumb-item active">Modifier Rendez-vous</li>
                     </ul>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12">
@@ -36,16 +36,15 @@
                         <h2 class="card-inside-title">Changer la date de votre rendez-vous </h2>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                            {{ form_start(form, {'attr': {'class': 'col-sm-12'}}) }}
+                            {{ form_start(form, {'attr': {'class': 'col-sm-12',novalidate:'novalidate'}}) }}
                                 <div class="form-group">                                    
                                     {{ form_widget(form.date_rv, {'attr': {'class': ''}}) }} 
+                                    <span class="text-danger">{{ form_errors(form.date_rv, {'attr': {'class': ''}}) }}</span> 
                                 </div>
-                                <div class="form-group">                                   
-                                 {{ form_widget(form.heure_rv, {'attr': {'class': ''}}) }}
-
-                                </div>
+                                
                                 <div>                                   
                                  {{ form_widget(form.type_rv, {'attr': {'class': ''}}) }}
+                                 <span class="text-danger">{{ form_errors(form.type_rv, {'attr': {'class': ''}}) }}</span>
 
                                 </div>
                             </div>
