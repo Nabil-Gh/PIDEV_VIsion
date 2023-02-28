@@ -20,20 +20,9 @@ class TestController extends AbstractController
     public function sendEmail(MailerInterface $mailer): Response
     {
         
-        $email = (new Email())
-        ->from('nabil.ghazouani@esprit.tn')
-        ->to('selim.khelifa@esprit.tn')
-        //->cc('cc@example.com')
-        //->bcc('bcc@example.com')
-        //->replyTo('fabien@example.com')
-        //->priority(Email::PRIORITY_HIGH)
-        ->subject('Time for Symfony Mailer!')
-        ->text('Sending emails is fun again!')
-        ->html('<p>See Twig integration for better HTML integration!</p>');
+       
 
-        $mailer->send($email);
-
-        return $this->render('test/index.html.twig', [
+        return $this->render('registration/confirmation_email.html.twig', [
             
             
         ]);
