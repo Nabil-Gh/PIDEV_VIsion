@@ -3,7 +3,7 @@
 namespace App\Controller;
 use App\Entity\Categories;
 use App\Form\CategoriesFormType;
-use Ob\HighchartsBundle\Highcharts\Highchart;
+use Ob\HighchartsBundle\Highcharts\Highchart; 
 
 use App\Repository\CategoriesRepository;
 use Symfony\Component\HttpFoundation\Response;
