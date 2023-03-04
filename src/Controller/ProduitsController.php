@@ -16,6 +16,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\QrCode;
+use App\Services\QrcodeService;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
 
 class ProduitsController extends AbstractController
 {
@@ -136,11 +145,11 @@ class ProduitsController extends AbstractController
     }
     
     #[Route('/afficher_produits_front/{id}', name: 'afficher_produits_front_details')]
-
     function Affiche_frontdetails(ProduitsRepository $repository,CategoriesRepository $repo,$id){
         $produits= $repository->find($id);
-       
-        return $this->render('produits details.html.twig',['c'=>$produits,]);
+        $img = $message->embed(\Swift_Image::fromPath('QRcode/produit'.$produits.'prix'.$produits->getPrix())); // your qr code
+
+        return $this->render('produits details.html.twig',['c'=>$produits,'qr'=>$img]);
     }
 
     #[Route('/afficher_produits_tri', name: 'afficher_produits_tri')]
@@ -149,6 +158,18 @@ class ProduitsController extends AbstractController
         $produits= $repository->findAll();
         $pr= $repository->findByPrix($produits);
         return $this->render('produits/afficher_produits.html.twig',['produits'=>$pr]);
+    }
+    #[Route('/searchproduitajax', name:'ajaxproduit')]
+    public function searchajax(Request $request ,ProduitsRepository $repository)
+    {
+        $repository = $this->getDoctrine()->getRepository(Produits::class);
+        $requestString=$request->get('searchValue');
+        $produits = $repository->findByLibelle($requestString);
+        
+        
+        return $this->render('produits/ajax.html.twig', [
+            'produits'=>$produits,
+        ]);
     }
    
 

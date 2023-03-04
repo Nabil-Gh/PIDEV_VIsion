@@ -46,11 +46,19 @@ class ProduitsRepository extends ServiceEntityRepository
    {
        return $this->createQueryBuilder('p')
            
-           ->orderBy('p.id', 'DESC')
+           ->orderBy('p.prix', 'DESC')
            ->getQuery()
            ->getResult()
        ;
    }
+   public function findByLibelle($search)
+    {
+        return $this->createQueryBuilder('res')
+                    ->andWhere('res.libelle LIKE :rech OR res.description LIKE :rech')
+                    ->setParameter('rech','%'.$search.'%')
+                    ->getQuery()
+                    ->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Produits
 //    {

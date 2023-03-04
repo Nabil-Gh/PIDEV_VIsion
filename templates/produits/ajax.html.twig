@@ -1,0 +1,52 @@
+ <div class="body">
+                            <table class="table table-bordered table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>libelle</th>
+                                        <th>description</th>
+                                        <th>prix</th>
+                                        <th>categories</th>
+                                        <th>delete</th>
+                                        <th>update</th>
+                                    </tr>
+                                </thead>
+                               
+                                <tbody>
+                                {% for c in produits %}
+                                     <tr >
+
+                            <td> {{ c.id }}</td>
+                            <td> {{ c.libelle }}</td>
+                             <td> {{ c.description }}</td>
+                            <td> {{ c.prix }}</td>
+                             <td> {{ c.type.nom}}</td>
+                             
+                        
+
+
+
+                            
+
+
+
+
+                            <td>  <a  href=" {{ path('delete_produits',{'id':c.id}) }} "  class="btn btn-raised btn-primary btn-round waves-effect"> Delete
+
+
+
+                                </a>
+
+
+                            </td>
+
+                            <td><a href="{{ path('update_produits',{'id':c.id}) }}" class="btn btn-raised btn-primary btn-round waves-effect"> Update</a> </td>
+                             
+
+
+
+                        </tr >
+                        {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
