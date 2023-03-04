@@ -21,9 +21,7 @@ class RendezVousType extends AbstractType
         ->add('date_rv',DateTimeType::class, [
             'widget' => 'single_text',
             'input' => 'datetime_immutable',
-            'constraints' => [
-                new Assert\GreaterThan('today',message:"choissisez une date valide")
-            ]
+            
         ])
 
             

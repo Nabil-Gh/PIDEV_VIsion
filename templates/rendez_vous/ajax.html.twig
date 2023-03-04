@@ -33,8 +33,8 @@
                                         <td>{{r.daterv|date("d/m/Y à H:i")}}</td>
                                         <td>{{r.typerv}}</td>
                                         <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="Modifier" href="{{ path ('update_rv',{'id':r.id}) }}">   Modifier</a></td>
-                                        <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="supp" href="{{ path ('removerv',{'id':r.id}) }}" >   supprimer </a></td>
-                                        <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="supp" href="{{ path ('afficheffr',{'id':r.id}) }}" >   fiche </a></td>
+                                        <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="supprimer" href="{{ path ('removerv',{'id':r.id}) }}" >   supprimer </a></td>
+                                        <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="fiche medicale" href="{{ path ('afficheffr',{'id':r.id}) }}" >   fiche </a></td>
                                     </tr>
 {% endfor %}
                                 

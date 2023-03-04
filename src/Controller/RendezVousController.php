@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Form\UpdateType;
 use App\Form\RendezVousType;
+use Twilio\Rest\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +23,8 @@ class RendezVousController extends AbstractController
     #[Route('/rendez_vous/afficherback', name: 'afficherrv')]
     public function afficherback(RendezVousRepository $repo,UserRepository $rp)
     {
-        $rv=$repo->findAll();
+        $med=$rp->find(23);
+        $rv=$repo->findbyuser($med);
 
 
         foreach ($rv as $event)
@@ -44,15 +46,27 @@ class RendezVousController extends AbstractController
     }
 
     #[Route('/rendez_vous/addfront', name: 'add_rv')]
-    public function addfront(ManagerRegistry $doctrine,Request $request,UserRepository $rp): Response
+    public function addfront(ManagerRegistry $doctrine,Request $request,UserRepository $rp,RendezVousRepository $repo): Response
     {
         $user=$rp->find(32);
         $med=$rp->find(23);
         $em = $doctrine->getManager();
+        $rendezvouss=$repo->findByuser($med);
         $rendezvous = new RendezVous();
         $form = $this->createForm(RendezVousType::class, $rendezvous);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        $s=0;
+        if($form->isSubmitted() && $form->isValid() ) {
+            foreach($rendezvouss as $rv)
+            {
+                if($rendezvous->getDateRv()->format("Y-m-d H:i:s") >= $rv->getDateRv()->format("Y-m-d H:i:s") && $rendezvous->getDateRv()->format("Y-m-d H:i:s") <= $rv->getDateRv()->modify("+2 hours")->format("Y-m-d H:i:s")){
+                    $s=1;
+                    return $this->renderForm('rendez_vous/appointmentform.html.twig', [
+                        'form' => $form,'s'=>$s
+                    ]);
+                }
+                
+            }
             $rendezvous-> setPatient($user);
             $rendezvous-> setMed($med);
             $em->persist($rendezvous);
@@ -60,7 +74,7 @@ class RendezVousController extends AbstractController
             return $this->redirectToRoute('afficherfr');
         }
         return $this->renderForm('rendez_vous/appointmentform.html.twig', [
-            'form' => $form,
+            'form' => $form,'s'=>$s
         ]);
     }
 
@@ -72,7 +86,18 @@ class RendezVousController extends AbstractController
         $rendezvous = $doctrine->getRepository(RendezVous::class)->find($id);
         $form = $this->createForm(UpdateType::class, $rendezvous);
         $form->handleRequest($request);
+        
         if($form->isSubmitted() && $form->isValid()) {
+            $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
+            $token = 'c51f90b15dc9449c41584d82fd9266bb';
+            $client = new Client($sid, $token);
+            $message = $client->messages->create(
+                "+216".$rendezvous->getPatient()->getTelephone(), 
+                [
+                    'from' => '+16076899929', 
+                    'body' => "Votre rendez-vous avec le médecin " . $rendezvous->getMed()->getNom() . " " . $rendezvous->getMed()->getPrenom() . " a été reporté pour le " . $rendezvous->getDateRv()->format("Y-m-d à H:i") . ". Merci pour votre compréhension !"
+                ]
+            );
           
             $em->flush();
             return $this->redirectToRoute('afficherrv');
@@ -112,6 +137,7 @@ class RendezVousController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            
             return $this->redirectToRoute('afficherfr');
         }
         return $this->renderForm('rendez_vous/updatefront.html.twig', [
@@ -131,15 +157,15 @@ class RendezVousController extends AbstractController
 
     #[Route('/searchuserajax', name:'ajaxuser')]
      
-    public function searchajax(Request $request ,RendezVousRepository $repository)
+    public function searchajax(Request $request ,RendezVousRepository $repository,UserRepository $rp)
     {
         $repository = $this->getDoctrine()->getRepository(RendezVous::class);
         $requestString=$request->get('searchValue');
-        $Users = $repository->findByMedecinOrPatient($requestString);
-        
+        $med=$rp->find(23);
+        $Users = $repository->findByMedecinOrPatient($requestString,$med);
         
         return $this->render('rendez_vous/ajax.html.twig', [
-            "rdv"=>$Users,
+            'rdv'=>$Users,
         ]);
     }
 }

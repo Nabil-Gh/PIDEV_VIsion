@@ -29,7 +29,9 @@
                              <img class ="thumb col-lg-5" src="{{asset('uploads/user/'~ r.med.image)}}" width="90"></img>
                                 <div class="col-lg-6 info">
                                     <h4>{{ r.med.nom }} {{r.med.prenom}}</h4>
-                                    <span>{{r.daterv|date('d/m/Y')}}</span>
+                                    <span>{{r.daterv|date('d/m/Y à H:i')}}</span>
+                                    
+
                                     <div class="bottom">
                                     <a href="{{ path ('updatefr',{'id':r.id}) }}" class="btn circle btn-sm btn-gradient">report</a>
                                      <a href="{{ path ('removefr',{'id':r.id}) }}" class="btn circle btn-sm btn-gradient">supp</a>    

@@ -37,7 +37,11 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             {{ form_widget(form.date_rv, {'attr': {'class': '','placeholder': 'Date du rendez-vous'}}) }}
-                                           <span class="text-danger"> {{ form_errors(form.date_rv) }}</span>
+                                            {% if s == 1 %}
+                                    <span class="text-danger"> <br>
+                                          La date/Heure que vous avez choisi est Ocuppée ! </span>
+                                    {% endif %}
+                                           
 
                                         </div>
                                     </div>

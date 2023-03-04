@@ -46,23 +46,14 @@ class RendezVousRepository extends ServiceEntityRepository
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects
 //     */
-    public function findByHour($value):array
-    {
-        return $this->createQueryBuilder('r')
-        ->andWhere('r.med = :val')
-        ->setParameter('val', $value)
-        ->orderBy('r.date_rv', 'ASC')
-        ->addOrderBy('r.heure_rv', 'ASC')
-        ->getQuery()
-        ->getResult()
-        ;
-    }
+    
 
     public function findByuser($value) 
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.med = :val')
             ->setParameter('val', $value)
+            ->orderBy('s.date_rv', 'ASC')
             ->getQuery()
             ->getResult()
         ;
@@ -86,17 +77,23 @@ class RendezVousRepository extends ServiceEntityRepository
 
 
 
-public function findByMedecinOrPatient($search)
-    {
-        return $this->createQueryBuilder('rv')
-                    ->innerJoin(User::class, 'med', 'WITH', 'rv.med = med.id')
-                    ->innerJoin(User::class, 'patient', 'WITH', 'rv.patient = patient.id')
-                    ->where('med.nom LIKE :nom OR med.prenom LIKE :nom ')
-                    ->orWhere('patient.nom LIKE :nom OR patient.prenom LIKE :nom ')
-                    ->setParameter('nom','%'.$search.'%')
-                    ->getQuery()
-                    ->getResult();
+public function findByMedecinOrPatient($search, $med)
+{
+    $qb = $this->createQueryBuilder('rv')
+        ->innerJoin(User::class, 'med', 'WITH', 'rv.med = med.id')
+        ->innerJoin(User::class, 'patient', 'WITH', 'rv.patient = patient.id')
+        ->where('med = :med')
+        ->setParameter('med', $med)
+        ->orderBy('rv.date_rv', 'ASC');
+
+    if (!empty($search)) {
+        $qb->andWhere('med.nom LIKE :nom OR med.prenom LIKE :nom ')
+           ->orWhere('patient.nom LIKE :nom OR patient.prenom LIKE :nom ')
+           ->setParameter('nom', '%'.$search.'%');
     }
 
+    return $qb->getQuery()
+              ->getResult();
+}
 
 }

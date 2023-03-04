@@ -28,36 +28,35 @@
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Type something..." id="search">
 								
+
 							</div>
 						</form>
 					</div>
 
-                    <div id="all"> 
-                                    {% include "rendez_vous/ajax.html.twig" %}
-                                </div>
+					<div id="all">
+						{% include "rendez_vous/ajax.html.twig" %}
+					</div>
 
 
-                                <div id="search"> 
-                                    
-                                </div>
+					<div id="search"></div>
 				</div>
 			</div>
-			
+
 
 		</div>
 
-		
-	</section>
-	
 
-{% block javascript %}
-	<script src="{{ asset('assets/js/jquery.js') }}"></script>
-	<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}"></script>
-	<script>
-		$(document).ready(function () {
+	</section>
+
+
+	{% block javascript %}
+		<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}"></script>
+		<script>
+			$(document).ready(function () {
 var currentRequest = null;
-$("#search").keyup(function (e) { 
+$("#search").keyup(function (e) {
 var value = $(this).val();
+
 if (currentRequest != null) {
 currentRequest.abort();
 }
@@ -66,7 +65,8 @@ currentRequest = $.ajax({
 url: "{{ path('ajaxuser') }}",
 type: 'GET',
 data: {
-'searchValue': value
+'searchValue': value,
+
 },
 success: function (retour) {
 $('#all').html(retour);
@@ -75,41 +75,41 @@ $('#all').html(retour);
 return false;
 });
 });
-	</script>
-{% endblock %}
-{% block calendar %}
+		</script>
+	{% endblock %}
+	{% block calendar %}
 
-<style>
-                #calendrier{
-                    width: 50%;
-                    margin: auto;
-                }
-            </style>
-			
-            <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+		<style>
+			#calendrier {
+				width: 50%;
+				margin: auto;
+			}
+		</style>
 
-            <div id="calendrier"></div>
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+
+		<div id="calendrier"></div>
 
 
-            <script>
-                window.onload = () =>{
-                    let calendarElt = document.querySelector("#calendrier")
-                    let calendar = new FullCalendar.Calendar(calendarElt,{
-                        initialView: 'dayGridMonth',
-                        locale: 'fr',
-                        timeZone: 'Europe/Paris',
-                        headerToolbar: {
-                            start: 'prev,next today',
-                            center: 'title',
-                            end: 'dayGridMonth,timeGridWeek'
-                        },
-						events: {{ data |raw }}
+		<script>
+			window.onload = () => {
+let calendarElt = document.querySelector("#calendrier")
+let calendar = new FullCalendar.Calendar(calendarElt, {
+initialView: 'dayGridMonth',
+locale: 'fr',
+timeZone: 'Europe/Paris',
+headerToolbar: {
+start: 'prev,next today',
+center: 'title',
+end: 'dayGridMonth,timeGridWeek,timeGridDay'
+},
+events: {{ data |raw }}
 
-                    })
-                    calendar.render();
-                }
-            </script>
-{% endblock %}
+})
+calendar.render();
+}
+		</script>
+	{% endblock %}
 
 {% endblock %}
