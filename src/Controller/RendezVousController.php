@@ -23,11 +23,12 @@ class RendezVousController extends AbstractController
     #[Route('/rendez_vous/afficherback', name: 'afficherrv')]
     public function afficherback(RendezVousRepository $repo,UserRepository $rp)
     {
+        $khlifa=$repo->findAll();
         $med=$rp->find(23);
-        $rv=$repo->findbyuser($med);
-
+        $rv=$repo->findByuser($med);
 
         foreach ($rv as $event)
+        if($event->isIsConfirmed() == true ){ 
         {
             $rdvs[]=[
                 'title'=>$event->getPatient()->getNom(),
@@ -38,10 +39,13 @@ class RendezVousController extends AbstractController
                 'textColor' => 'black'
             ];
         }
+    }
         $data = json_encode($rdvs);
         return $this->render('rendez_vous/afficherrv.html.twig', [
             'rdv' => $rv,
-            'data'=>$data
+            'med'=>$med,
+            'data'=>$data,
+            'khlifa'=>$khlifa
         ]);
     }
 
@@ -52,6 +56,20 @@ class RendezVousController extends AbstractController
         $med=$rp->find(23);
         $em = $doctrine->getManager();
         $rendezvouss=$repo->findByuser($med);
+        foreach ($rendezvouss as $event)
+        if($event->isIsConfirmed() == true ){ 
+        {
+            $rdvs[]=[
+                'title'=>$event->getPatient()->getNom(),
+                'start'=>$event->getDateRv()->format("Y-m-d H:i:s"),
+                'end'=>$event->getDateRv()->modify("+2 hours")->format("Y-m-d H:i:s"),
+                'backgroundColor'=> '#0ec51',
+                'borderColor'=> 'green',
+                'textColor' => 'black'
+            ];
+        }
+    }
+        $data = json_encode($rdvs);
         $rendezvous = new RendezVous();
         $form = $this->createForm(RendezVousType::class, $rendezvous);
         $form->handleRequest($request);
@@ -62,11 +80,12 @@ class RendezVousController extends AbstractController
                 if($rendezvous->getDateRv()->format("Y-m-d H:i:s") >= $rv->getDateRv()->format("Y-m-d H:i:s") && $rendezvous->getDateRv()->format("Y-m-d H:i:s") <= $rv->getDateRv()->modify("+2 hours")->format("Y-m-d H:i:s")){
                     $s=1;
                     return $this->renderForm('rendez_vous/appointmentform.html.twig', [
-                        'form' => $form,'s'=>$s
+                        'form' => $form,'s'=>$s,'data'=>$data
                     ]);
                 }
                 
             }
+            $rendezvous->setIsConfirmed(false);
             $rendezvous-> setPatient($user);
             $rendezvous-> setMed($med);
             $em->persist($rendezvous);
@@ -74,7 +93,7 @@ class RendezVousController extends AbstractController
             return $this->redirectToRoute('afficherfr');
         }
         return $this->renderForm('rendez_vous/appointmentform.html.twig', [
-            'form' => $form,'s'=>$s
+            'form' => $form,'s'=>$s,'data'=>$data
         ]);
     }
 
@@ -85,6 +104,7 @@ class RendezVousController extends AbstractController
         $em = $doctrine->getManager();
         $rendezvous = $doctrine->getRepository(RendezVous::class)->find($id);
         $form = $this->createForm(UpdateType::class, $rendezvous);
+        $rv=$repo->find(23);
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
@@ -104,6 +124,7 @@ class RendezVousController extends AbstractController
         }
         return $this->renderForm('rendez_vous/update.html.twig', [
             'form' => $form,
+            'rdv'=>$rv
         ]);
     }
 
@@ -122,7 +143,7 @@ class RendezVousController extends AbstractController
     public function afficherfront(RendezVousRepository $repo,UserRepository $rp): Response
     {
         $user=$rp->find(23);
-        $rendezvous = $repo->findbyUser($user);
+        $rendezvous = $repo->findbyuser($user);
         return $this->render('rendez_vous/afficherrvfront.html.twig', [
             'rdv' => $rendezvous,
         ]);
@@ -168,6 +189,25 @@ class RendezVousController extends AbstractController
             'rdv'=>$Users,
         ]);
     }
+
+    #[Route('rendez_vous/{id}', name: 'confirmerrvm')]
+    public function confirmerrv(ManagerRegistry $doctrine,$id,RendezVousRepository $repo): Response
+    {
+        $em= $doctrine->getManager();
+        $user=$repo->find(32);
+        $rdv = $repo->findbyUser($user);
+        $rendezvous=$repo->find($id);
+        $rendezvous->setIsConfirmed(true);
+        $em->flush();
+        
+        return $this->redirectToRoute('afficherrv');
+        
+        
+       
+     
+
+    }
+
 }
 
     

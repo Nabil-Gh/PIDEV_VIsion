@@ -43,6 +43,8 @@ class RendezVousRepository extends ServiceEntityRepository
         }
     }
 
+    
+
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects
 //     */
@@ -52,6 +54,7 @@ class RendezVousRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.med = :val')
+            ->andWhere('s.isConfirmed = true')
             ->setParameter('val', $value)
             ->orderBy('s.date_rv', 'ASC')
             ->getQuery()
@@ -82,18 +85,27 @@ public function findByMedecinOrPatient($search, $med)
     $qb = $this->createQueryBuilder('rv')
         ->innerJoin(User::class, 'med', 'WITH', 'rv.med = med.id')
         ->innerJoin(User::class, 'patient', 'WITH', 'rv.patient = patient.id')
-        ->where('med = :med')
+        ->where('rv.med = :med')
+        ->andWhere('rv.isConfirmed = true')
         ->setParameter('med', $med)
         ->orderBy('rv.date_rv', 'ASC');
 
     if (!empty($search)) {
-        $qb->andWhere('med.nom LIKE :nom OR med.prenom LIKE :nom ')
-           ->orWhere('patient.nom LIKE :nom OR patient.prenom LIKE :nom ')
-           ->setParameter('nom', '%'.$search.'%');
+        $qb->andWhere(
+            $qb->expr()->orX(
+                $qb->expr()->like('med.nom', ':search'),
+                $qb->expr()->like('med.prenom', ':search'),
+                $qb->expr()->like('patient.nom', ':search'),
+                $qb->expr()->like('patient.prenom', ':search')
+            )
+        )->setParameter('search', '%' . $search . '%');
     }
 
-    return $qb->getQuery()
-              ->getResult();
+    return $qb->getQuery()->getResult();
+}
 }
 
-}
+
+
+
+

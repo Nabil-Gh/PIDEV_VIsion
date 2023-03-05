@@ -17,13 +17,14 @@ class FicheMedicaleController extends AbstractController
     {
         $rendezvous=$rv->find($id);
         $user=$rendezvous->getPatient();
+        $rdv=$rv->findAll();
         
         $fichemedicale = $repo->findByuser($user);
         
         $docs=$rep->findByfiche($fichemedicale[0]);
         
         return $this->render('fiche_medicale/ficheMedicale.html.twig', [
-            'fiche' => $fichemedicale[0],'user'=>$user,'docs'=>$docs,
+            'fiche' => $fichemedicale[0],'user'=>$user,'docs'=>$docs,'rdv'=>$rdv
         ]);
     }
 

@@ -33,6 +33,9 @@ class RendezVous
     #[ORM\JoinColumn(nullable: false)]
     private ?User $patient = null;
 
+    #[ORM\Column]
+    private ?bool $isConfirmed = null;
+
    
 
     public function getId(): ?int
@@ -84,6 +87,18 @@ class RendezVous
     public function setPatient(?User $patient): self
     {
         $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function isIsConfirmed(): ?bool
+    {
+        return $this->isConfirmed;
+    }
+
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
 
         return $this;
     }

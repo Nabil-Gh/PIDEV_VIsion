@@ -41,63 +41,52 @@
 	</div>
 </div>
 <div class="col-lg-2 col-md-12 user_earnings"></div></div></div><ul class="nav nav-tabs profile_tab"><li class="nav-item">
-<a class="nav-link active" data-toggle="tab" href="#overview">Details</a></li></ul></div><div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="overview">
-    <div class="row">
-      <div class="col-lg-4 col-md-12">
-        <div class="card">
-          <div class="header">
-            <h2><strong>Infos</strong></h2>
-          </div>
-          <div class="body">
-            <small class="text-muted">Addresse:</small>
-            <p>{{user.adress}}</p>
-            <hr>
-            <small class="text-muted">Email:</small>
-            <p>{{user.email}}</p>
-            <hr>
-            <small class="text-muted">Numero de telephone:</small>
-            <p>{{user.telephone}}</p>
-            <hr>
-            <small class="text-muted">Date de naissance:</small>
-            <p class="m-b-0">{{user.daten|date('d/m/Y')}}</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="header">
-            <h2><strong>vos</strong> Documents</h2>
-          </div>
-          <div class="body">
-            {% for d in docs %}
-  <a href="#" data-toggle="modal" data-target="#defaultModal{{ d.id }}">
-    {{ d.nom }}
-  </a>
-  <br>
-  <div class="modal fade " id="defaultModal{{ d.id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="defaultModalLabel">{{ d.nom }}</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img src="{{ asset('uploads/doc/'~d.fichier) }}">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-{% endblock %}
+</li></ul></div><div class="tab-content"><div role="tabpanel" class="tab-pane active" id="overview"><div class="row">
+<div class="col-lg-4 col-md-12">
+	<div class="card">
+		<div class="header">
+			<h2>
+				<strong>Infos</strong>
+			</h2>
+		</div>
+		<div class="body">
+			<small class="text-muted">Addresse:</small>
+			<p>{{user.adress}}</p>
+			<hr>
+			<small class="text-muted">Email:</small>
+			<p>{{user.email}}</p>
+			<hr>
+			<small class="text-muted">Numero de telephone:</small>
+			<p>{{user.telephone}}</p>
+			<hr>
+			<small class="text-muted">Date de naissance:</small>
+			<p class="m-b-0">{{user.daten|date('d/m/Y')}}</p>
+		</div>
+	</div>
+	<div class="card">
+		<div class="header">
+			<h2>
+				<strong>vos</strong>
+				Documents</h2>
+		</div>
 
+		{% for d in docs %}
+		<div class="body">			
+				<button id="open-modal">{{d.nom}}</button>
+
+				<div id="modal" class="modal">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2 id="doc-name">{{d.nom}}</h2>
+							<span class="close">&times;</span>
+						</div>
+						<div class="modal-body">
+							<img src="{{asset('uploads/doc/'~ d.fichier) }}" id="doc-file">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>{% endfor %}</div></div></div></div></div></div></section>{% endblock %}
