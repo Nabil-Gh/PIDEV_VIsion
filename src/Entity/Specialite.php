@@ -18,7 +18,7 @@ class Specialite
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:5,minMessage:"il faut Minimum 5 lettres")]
-    #[Assert\Regex(pattern:"/^[a-zA-Z\s]+$/",message:"ce Champ ne contient que des lettres")]
+    #[Assert\Regex(pattern:"/^[a-zA-Z\s]+$/",message:"Ce Champ ne contient que des lettres")]
 
     private ?string $namespe = null;
 

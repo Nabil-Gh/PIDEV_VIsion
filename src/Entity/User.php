@@ -81,7 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users',cascade:["persist","remove","merge"])]
+    #[ORM\ManyToOne(targetEntity: Specialite::class,cascade:["persist","remove","merge"])]
     private ?Specialite $specialite = null;
 
     public function getId(): ?int

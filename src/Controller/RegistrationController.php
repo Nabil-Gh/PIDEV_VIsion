@@ -46,7 +46,8 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setDatecr(new \DateTime("now"));
-            if ($user->getRoles()==[]){
+            $rr=$user->getRoles();
+            if ($rr[0]=="ROLE_USER"){
                 $user->setIsActivated(1);
                 $rr = $user->getRoles();
                 $rr[]= 'ROLE_ACTIVE';
@@ -84,8 +85,7 @@ class RegistrationController extends AbstractController
               // generate a signed url and email it to the user
             
            
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user
-            );
+            //$this->emailVerifier->sendEmailConfirmation('app_verify_email', $user);
              //do anything else you need here, like send an email
             if ($user->getRoles()[0]=='ROLE_MEDECIN'){
                 $idm=$user->getId();
