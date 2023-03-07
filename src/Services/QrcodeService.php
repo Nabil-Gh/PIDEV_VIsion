@@ -21,12 +21,12 @@ class QrcodeService
         $this->builder = $builder;
     }
 
-    public function qrcode( $produit,$prix)
+    public function qrcode( $lib,$des,$prix)
     {
 
         // set qrcode
         $result = $this->builder
-            ->data("le produit : : ".$produit.' '. " le prix est : ".$prix)
+            ->data("le produit : : ".$lib.' '. " la description : ".$des."le prix".$prix)
             ->encoding(new Encoding('UTF-8'))
             ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
             ->size(200)
@@ -36,7 +36,7 @@ class QrcodeService
 
 
         //Save img png
-        $result->saveToFile('QRcode/'.'ptoduit'.$produit.'prix'.$prix);
+        $result->saveToFile('QRcode/'.'produit'.$lib.".png");
 
         return $result->getDataUri();
     }

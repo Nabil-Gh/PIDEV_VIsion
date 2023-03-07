@@ -35,8 +35,16 @@ class Produits
     #[ORM\ManyToOne(cascade:["persist","remove","merge"])] 
     private ?Categories $type = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\Column]
+    private ?int $likes = null;
+
+    #[ORM\Column]
+    private ?int $dislikes = null;
+
+
 
     public function getId(): ?int
     {
@@ -102,4 +110,32 @@ class Produits
 
         return $this;
     }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getDislikes(): ?int
+    {
+        return $this->dislikes;
+    }
+
+    public function setDislikes(int $dislikes): self
+    {
+        $this->dislikes = $dislikes;
+
+        return $this;
+    }
+
+   
+
+    
 }

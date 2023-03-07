@@ -39,7 +39,7 @@ class ProduitsController extends AbstractController
 
     #[Route('/ajout_produits', name: 'ajout_produits')]
 
-    function Ajout(Request $request,SluggerInterface $slugger)
+    function Ajout(QrcodeService $qrcodeService,Request $request,SluggerInterface $slugger)
     {
         $Produits=new Produits();
         $form=$this->createForm(ProduitsFormType::class,$Produits);
@@ -69,7 +69,7 @@ class ProduitsController extends AbstractController
                 // instead of its contents
                 $Produits->setImage($newFilename); 
             }
-
+            $qrCode = $qrcodeService->qrcode($Produits->getLibelle(),$Produits->getDescription(),$Produits->getPrix());
             $em=$this->getDoctrine()->getManager();
             $em->persist($Produits);
             $em->flush();
@@ -132,7 +132,7 @@ class ProduitsController extends AbstractController
         // On "fabrique" les données
         $dataPanier = [];
         $total = 0;
-
+        $panier=[];
         foreach($panier as $id => $quantite){
             $Produits = $repository->find($id);
             $dataPanier[] = [
@@ -141,15 +141,17 @@ class ProduitsController extends AbstractController
             ];
             $total += $Produits->getPrix() * $quantite;
         }
+    
         return $this->render('produits/afficher_produits_front.html.twig',compact('categories','produits',"dataPanier", "total"));
     }
     
     #[Route('/afficher_produits_front/{id}', name: 'afficher_produits_front_details')]
     function Affiche_frontdetails(ProduitsRepository $repository,CategoriesRepository $repo,$id){
         $produits= $repository->find($id);
-        $img = $message->embed(\Swift_Image::fromPath('QRcode/produit'.$produits.'prix'.$produits->getPrix())); // your qr code
+        $img="produit".$produits->getLibelle().".png";
+        
 
-        return $this->render('produits details.html.twig',['c'=>$produits,'qr'=>$img]);
+        return $this->render('produits details.html.twig',['c'=>$produits,'img'=>$img]);
     }
 
     #[Route('/afficher_produits_tri', name: 'afficher_produits_tri')]
@@ -170,6 +172,31 @@ class ProduitsController extends AbstractController
         return $this->render('produits/ajax.html.twig', [
             'produits'=>$produits,
         ]);
+    }
+    /**
+     * @Route("/produits/likes/{id}", name="produits_likes")
+     */
+    public function likes(Produits $produits): Response
+    {
+        $produits->setAvis(true);
+        $entityManager = $this->getDoctrine()->getManager();
+       
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/produits/dislikes/{id}", name="produits_dislikes")
+     */
+    public function dislikes(Produits $produits): Response
+    {
+        $produits->setAvis(false);
+        $entityManager = $this->getDoctrine()->getManager();
+      
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
    
 
