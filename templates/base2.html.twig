@@ -91,14 +91,35 @@
                  {% for r in khlifa %}
                 {% if r.med == med %}
                 {% if r.isConfirmed == false %}
-                    <ul class="notification list-unstyled">
+                <ul class="notification list-unstyled">
+                {% if r.typerv == "Au cabinet" %}
                         <li>
                             <i class="zmdi zmdi-balance-wallet text-success"></i>
                             <strong>{{r.patient.prenom}} {{r.patient.nom}}</strong>
                             <p>Confirmation de rendez-vous le {{r.daterv|date('d/m/y à H:i')}}</p>
+                            <p>Type du Rendez-vous :  {{r.typerv}}</p>
                             <a href="{{path('confirmerrvm',{'id':r.id})}}">CONFIRMER</a>
                             <a href="{{path('removerv',{'id':r.id})}}">REFUSER</a>
                         </li>
+                        {% else %}
+                        <li>
+                            <i class="zmdi zmdi-balance-wallet text-success"></i>
+                            <strong>{{r.patient.prenom}} {{r.patient.nom}}</strong>
+                            <p>Confirmation de rendez-vous le {{r.daterv|date('d/m/y à H:i')}}</p>
+                            <p>Type du Rendez-vous :  {{r.typerv}}</p>
+                        
+
+                        <form action="{{path('confirmerrvm',{'id':r.id})}}"  method="POST">
+							<input name="code"  >Entrer le code de la session en ligne </input>
+							<button type="submit" > Confirmer </button>
+                            </form>
+                            <a href="{{path('removerv',{'id':r.id})}}">REFUSER</a>
+
+                            </li>
+
+
+
+                        {% endif %}
                         {% endif %}
                         {% endif %}
                         {% endfor %}

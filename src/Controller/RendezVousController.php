@@ -35,7 +35,7 @@ class RendezVousController extends AbstractController
                 'title'=>$event->getPatient()->getPrenom().' '.$event->getPatient()->getNom(),
                 'backgroundColor'=> $event->getBackgroundColor(),
                 'borderColor'=> $event->getBackgroundColor(),
-                'textColor' => 'black'
+                'textColor' => 'white'
             ];
         }
     }
@@ -56,8 +56,8 @@ class RendezVousController extends AbstractController
         $med=$rp->find(23);
         $em = $doctrine->getManager();
         $rendezvouss=$repo->findByuser($med);
-        foreach ($rendezvouss as $event)
-        if($event->isIsConfirmed() == true ){ 
+        foreach ($rendezvouss as $event){
+        if($event->isIsConfirmed() == true ) 
         {
             $rdvs[]=[
                 'title'=>'Occupé !',
@@ -214,16 +214,17 @@ class RendezVousController extends AbstractController
         ]);
     }
 
-    #[Route('/rendez_vous/c/{id}', name: 'confirmerrvm')]
-    public function confirmerrv(ManagerRegistry $doctrine,$id,RendezVousRepository $repo): Response
+    #[Route('/rendez_vous/c/{id}', name: 'confirmerrvm',methods: ['GET','POST'])]
+    public function confirmerrv(ManagerRegistry $doctrine,$id,RendezVousRepository $repo,Request $req): Response
     {
         $em= $doctrine->getManager();
         $user=$repo->find(23);
         $rendezvous=$repo->find($id);
         $rendezvous->setIsConfirmed(true);
         $em->flush();
-        $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
-        $token = '37682b7ab82527c5f19f99708c24b430';
+        if($rendezvous->getTypeRv()=="Au cabinet"){
+            $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
+        $token = '2afce8ab46c023fed9b3dfac0aab8a08';
         $client = new Client($sid, $token);
         $message = $client->messages->create(
             "+216".$rendezvous->getPatient()->getTelephone(), 
@@ -232,6 +233,22 @@ class RendezVousController extends AbstractController
                 'body' => "Votre rendez-vous avec le Medecin " . $rendezvous->getMed()->getPrenom() . " " . $rendezvous->getMed()->getNom() . " Prévu le :  " . $rendezvous->getDateRv()->format("Y-m-d à H:i") . "a été confirmé . Vous pouvez le consulter sur notre application maintenant !  "
             ]
         );
+
+        }
+        else{
+            $code=$req->get("code");
+            $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
+        $token = '2afce8ab46c023fed9b3dfac0aab8a08';
+        $client = new Client($sid, $token);
+        $message = $client->messages->create(
+            "+216".$rendezvous->getPatient()->getTelephone(), 
+            [
+                'from' => '+16076899929', 
+                'body' => "Votre rendez-vous avec le Medecin " . $rendezvous->getMed()->getPrenom() . " " . $rendezvous->getMed()->getNom() . " Prévu le :  " . $rendezvous->getDateRv()->format("Y-m-d à H:i") . "a été confirmé . Veuillez utiliser ce code ".$code." pour rejoindre votre specialiste dans un appel video ."
+            ]
+        );
+        }
+        
         return $this->redirectToRoute('afficherrv');
 
     }
