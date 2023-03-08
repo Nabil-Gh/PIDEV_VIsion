@@ -71,22 +71,40 @@
 		</div>
 
 		{% for d in docs %}
-		<div class="body">			
-				<button id="open-modal">{{d.nom}}</button>
+    <div class="body">			
+        <button id="open-modal-{{d.id}}">{{d.nom}}</button>
 
-				<div id="modal" class="modal">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h2 id="doc-name">{{d.nom}}</h2>
-							<span class="close">&times;</span>
-						</div>
-						<div class="modal-body">
-							<img src="{{asset('uploads/doc/'~ d.fichier) }}" id="doc-file">
-						</div>
-					</div>
-				</div>
-			</div>
+        <div id="modal-{{d.id}}" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="doc-name">{{d.nom}}</h2>
+                    <span class="close" id="close-modal-{{d.id}}">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('uploads/doc/'~ d.fichier) }}" id="doc-file">
+                </div>
+            </div>
+        </div>
+    </div>
 
-		</div>
-	</div>
-</div>{% endfor %}</div></div></div></div></div></div></section>{% endblock %}
+    <script>
+        var modal{{d.id}} = document.getElementById('modal-{{d.id}}');
+        var btn{{d.id}} = document.getElementById("open-modal-{{d.id}}");
+        var span{{d.id}} = document.getElementById("close-modal-{{d.id}}");
+
+        btn{{d.id}}.onclick = function() {
+            modal{{d.id}}.style.display = "block";
+        }
+
+        span{{d.id}}.onclick = function() {
+            modal{{d.id}}.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal{{d.id}}) {
+                modal{{d.id}}.style.display = "none";
+            }
+        }
+    </script>
+{% endfor %}</div></div></div></div></div></div></section>{% endblock %}
+

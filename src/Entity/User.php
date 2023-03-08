@@ -163,7 +163,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function setTelephone(int $telephone): self
-    {
+    { 
         $this->telephone = $telephone;
 
         return $this;

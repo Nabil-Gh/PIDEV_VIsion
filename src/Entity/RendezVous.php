@@ -102,6 +102,18 @@ class RendezVous
 
         return $this;
     }
+    public function getBackgroundColor(): ?string
+    {
+        $type_rv = $this->getTypeRv();
+            if($type_rv=="Au cabinet"){
+                return '#000080';
+            }
+            else{return 'teal';}
+       
+
+            
+    }
+}
 
     
-}
+

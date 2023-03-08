@@ -26,16 +26,15 @@ class RendezVousController extends AbstractController
         $khlifa=$repo->findAll();
         $med=$rp->find(23);
         $rv=$repo->findByuser($med);
-
         foreach ($rv as $event)
         if($event->isIsConfirmed() == true ){ 
         {
             $rdvs[]=[
-                'title'=>$event->getPatient()->getNom(),
                 'start'=>$event->getDateRv()->format("Y-m-d H:i:s"),
                 'end'=>$event->getDateRv()->modify("+2 hours")->format("Y-m-d H:i:s"),
-                'backgroundColor'=> '#0ec51',
-                'borderColor'=> 'green',
+                'title'=>$event->getPatient()->getPrenom().' '.$event->getPatient()->getNom(),
+                'backgroundColor'=> $event->getBackgroundColor(),
+                'borderColor'=> $event->getBackgroundColor(),
                 'textColor' => 'black'
             ];
         }
@@ -52,6 +51,7 @@ class RendezVousController extends AbstractController
     #[Route('/rendez_vous/addfront', name: 'add_rv')]
     public function addfront(ManagerRegistry $doctrine,Request $request,UserRepository $rp,RendezVousRepository $repo): Response
     {
+        $message="";
         $user=$rp->find(32);
         $med=$rp->find(23);
         $em = $doctrine->getManager();
@@ -60,10 +60,10 @@ class RendezVousController extends AbstractController
         if($event->isIsConfirmed() == true ){ 
         {
             $rdvs[]=[
-                'title'=>$event->getPatient()->getNom(),
+                'title'=>'Occupé !',
                 'start'=>$event->getDateRv()->format("Y-m-d H:i:s"),
                 'end'=>$event->getDateRv()->modify("+2 hours")->format("Y-m-d H:i:s"),
-                'backgroundColor'=> '#0ec51',
+                'backgroundColor'=> 'teal',
                 'borderColor'=> 'green',
                 'textColor' => 'black'
             ];
@@ -90,26 +90,29 @@ class RendezVousController extends AbstractController
             $rendezvous-> setMed($med);
             $em->persist($rendezvous);
             $em->flush();
+           // $message="Votre rendez-vous avec votre specialiste est confirmé ! vous receverez un SMS lors de la confirmation de la part du Medecin.Nous espérons que vous vous rétablirez bientôt!";
+            
             return $this->redirectToRoute('afficherfr');
         }
         return $this->renderForm('rendez_vous/appointmentform.html.twig', [
-            'form' => $form,'s'=>$s,'data'=>$data
+            'form' => $form,'s'=>$s,'data'=>$data,'message'=>$message
         ]);
     }
 
 
     #[Route('/rendez_vous/update/{id}', name: 'update_rv')]
-    public function update(ManagerRegistry $doctrine,Request $request,$id): Response
+    public function update(ManagerRegistry $doctrine,Request $request,$id,RendezVousRepository $repo,UserRepository $rp): Response
     {
         $em = $doctrine->getManager();
         $rendezvous = $doctrine->getRepository(RendezVous::class)->find($id);
         $form = $this->createForm(UpdateType::class, $rendezvous);
-        $rv=$repo->find(23);
+        $rv=$repo->findAll();
         $form->handleRequest($request);
+        $med=$rp->find(23);
         
         if($form->isSubmitted() && $form->isValid()) {
             $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
-            $token = 'c51f90b15dc9449c41584d82fd9266bb';
+            $token = '37682b7ab82527c5f19f99708c24b430';
             $client = new Client($sid, $token);
             $message = $client->messages->create(
                 "+216".$rendezvous->getPatient()->getTelephone(), 
@@ -124,7 +127,8 @@ class RendezVousController extends AbstractController
         }
         return $this->renderForm('rendez_vous/update.html.twig', [
             'form' => $form,
-            'rdv'=>$rv
+            'khlifa'=>$rv,
+            'med'=>$med
         ]);
     }
 
@@ -133,6 +137,16 @@ class RendezVousController extends AbstractController
     {
         $em= $doctrine->getManager();
         $rendezvous= $doctrine->getRepository(RendezVous::class)->find($id);
+        $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
+        $token = '37682b7ab82527c5f19f99708c24b430';
+        $client = new Client($sid, $token);
+        $message = $client->messages->create(
+            "+216".$rendezvous->getPatient()->getTelephone(), 
+            [
+                'from' => '+16076899929', 
+                'body' => "Votre rendez-vous avec le Medecin " . $rendezvous->getMed()->getPrenom() . " " . $rendezvous->getMed()->getNom() . " Prévu le :  " . $rendezvous->getDateRv()->format("Y-m-d à H:i") . "a été annulé. "
+            ]
+        );
         $em->remove($rendezvous);
         $em->flush();
         return $this->redirectToRoute('afficherrv');
@@ -157,8 +171,8 @@ class RendezVousController extends AbstractController
         $form = $this->createForm(UpdateType::class, $rendezvous);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            $rendezvous->setIsConfirmed(false);
             $em->flush();
-            
             return $this->redirectToRoute('afficherfr');
         }
         return $this->renderForm('rendez_vous/updatefront.html.twig', [
@@ -173,6 +187,16 @@ class RendezVousController extends AbstractController
         $rendezvous= $doctrine->getRepository(RendezVous::class)->find($id);
         $em->remove($rendezvous);
         $em->flush();
+        $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
+        $token = '37682b7ab82527c5f19f99708c24b430';
+        $client = new Client($sid, $token);
+        $message = $client->messages->create(
+            "+216".$rendezvous->getMed()->getTelephone(), 
+            [
+                'from' => '+16076899929', 
+                'body' => "Votre rendez-vous avec le Patient " . $rendezvous->getPatient()->getPrenom() . " " . $rendezvous->getPatient()->getNom() . " Prévu le :  " . $rendezvous->getDateRv()->format("Y-m-d à H:i") . "a été annulé. "
+            ]
+        );
         return $this->redirectToRoute('afficherfr');
     }
 
@@ -190,23 +214,44 @@ class RendezVousController extends AbstractController
         ]);
     }
 
-    #[Route('rendez_vous/{id}', name: 'confirmerrvm')]
+    #[Route('/rendez_vous/c/{id}', name: 'confirmerrvm')]
     public function confirmerrv(ManagerRegistry $doctrine,$id,RendezVousRepository $repo): Response
     {
         $em= $doctrine->getManager();
-        $user=$repo->find(32);
-        $rdv = $repo->findbyUser($user);
+        $user=$repo->find(23);
         $rendezvous=$repo->find($id);
         $rendezvous->setIsConfirmed(true);
         $em->flush();
-        
+        $sid = 'ACd656184a7906751dc2fc7e53bcdd3544';
+        $token = '37682b7ab82527c5f19f99708c24b430';
+        $client = new Client($sid, $token);
+        $message = $client->messages->create(
+            "+216".$rendezvous->getPatient()->getTelephone(), 
+            [
+                'from' => '+16076899929', 
+                'body' => "Votre rendez-vous avec le Medecin " . $rendezvous->getMed()->getPrenom() . " " . $rendezvous->getMed()->getNom() . " Prévu le :  " . $rendezvous->getDateRv()->format("Y-m-d à H:i") . "a été confirmé . Vous pouvez le consulter sur notre application maintenant !  "
+            ]
+        );
         return $this->redirectToRoute('afficherrv');
-        
-        
-       
-     
 
     }
+
+    #[Route('/rendez_vous/historique', name: 'historique')]
+    public function historique(ManagerRegistry $doctrine,Request $request,RendezVousRepository $repo,UserRepository $rp): Response
+    {
+        $data=null;
+        $med=$rp->find(23);
+        $expire=$repo->findByexpire($med);
+        $rv=$repo->findAll();
+        
+        return $this->render('rendez_vous/afficherrv.html.twig', [
+            'rdv'=>$expire,'med'=>$med,'khlifa'=>$rv,'data'=>$data
+        ]);
+
+    }
+
+   
+
 
 }
 

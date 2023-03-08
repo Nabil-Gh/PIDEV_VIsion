@@ -332,15 +332,15 @@
                 <li>
                     <div class="user-info m-b-20">
                         <div class="image">
-                            <a href="profile.html"><img src="{{asset('assets/images/profile_av.jpg')}}" alt="User"></a>
+                            <a href="{{path('afficherrv')}}"><img src="{{asset('uploads/user/'~ med.image)}}" alt="User"></a>
                         </div>
                         <div class="detail">
-                            <h6>KHALIFA</h6>
+                            <h6>Dr : {{med.prenom}} {{med.nom}}</h6>
                                                        
                         </div>
                     </div>
                 </li>
-                <li class="header">MAIN</li>
+                <li class="header">Menu Principal</li>
                 <li class="active open"> <a href="{{ path ('afficherrv') }}"><i class="zmdi zmdi-home"></i><span>Rendez-vous</span></a></li>
                 
                        

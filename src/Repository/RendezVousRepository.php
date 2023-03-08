@@ -55,6 +55,19 @@ class RendezVousRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.med = :val')
             ->andWhere('s.isConfirmed = true')
+            ->andWhere('s.date_rv >= CURRENT_DATE()')
+            ->setParameter('val', $value)
+            ->orderBy('s.date_rv', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findByexpire($value) :array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.med = :val')
+            ->andWhere('s.isConfirmed = true')
+            ->andWhere('s.date_rv < CURRENT_DATE()')
             ->setParameter('val', $value)
             ->orderBy('s.date_rv', 'ASC')
             ->getQuery()
@@ -100,8 +113,24 @@ public function findByMedecinOrPatient($search, $med)
             )
         )->setParameter('search', '%' . $search . '%');
     }
+    $qb->andWhere('rv.date_rv >= CURRENT_DATE()')
+   ;
 
     return $qb->getQuery()->getResult();
+}
+
+
+
+public function findByType($value,$med): array
+{ return $this->createQueryBuilder('r')
+    ->where('r.IsConfirmed = true')
+    ->andWhere('r.type_rv LIKE :val')
+    ->andWhere('r.med = :med')
+    ->setParameter('val',$value)
+    ->setParameter('med',$med)
+    ->getQuery()
+    ->getResult();
+
 }
 }
 

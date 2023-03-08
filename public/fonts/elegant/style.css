@@ -8,6 +8,13 @@
 	font-weight: normal;
 	font-style: normal;
 }
+.medecin-name {
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #333;
+  }
 
 /* Use the following CSS code if you want to use data attributes for inserting your icons */
 [data-icon]:before {

@@ -26,6 +26,7 @@
 
 
                                 {% for r in rdv %}
+                                
                                   <tr>
                                         <td>{{r.id}}</td>
                                         <td>{{ r.med.nom }} {{r.med.prenom}}</td>
@@ -36,6 +37,7 @@
                                         <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="supprimer" href="{{ path ('removerv',{'id':r.id}) }}" >   supprimer </a></td>
                                         <td><a class="btn btn-raised btn-primary btn-round waves-effect" title="fiche medicale" href="{{ path ('afficheffr',{'id':r.id}) }}" >   fiche </a></td>
                                     </tr>
+                                    
                         
 {% endfor %}
                                 

@@ -27,6 +27,7 @@ class Documents
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:3,minMessage:"il faut un Minimum de 3 lettres")]
+    #[Assert\NotBlank(message:"Ce champs ne peut pas etre vide !")]
      private ?string $nom = null;
 
     public function getId(): ?int

@@ -1,51 +1,91 @@
- {% extends 'base.html.twig' %}
-
-{% block title %}liste rendez-vous{% endblock %}
-{% block body %}
-<div class="breadcrumb-area gradient-bg bg-cover shadow dark text-light text-center" style="background-image: url({{asset('front/img/banner/4.jpg')}})">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h1>Vos Rendez-Vous</h1>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Breadcrumb -->
-
-    <!-- Star Doctors Area
-    ============================================= -->
-    <div class="doctors-area carousel-shadow inc-carousel bg-gray default-padding">
-        <div class="container-lg">
-            <div class="doctor-items">
-                <div class="col-lg-12">
-                    <div class="doctors-carousel owl-carousel owl-theme">
-
-                        
-                        {% for r in rdv %}
-                        <div class="item">
-                            <div class="row">
-                             <img class ="thumb col-lg-5" src="{{asset('uploads/user/'~ r.med.image)}}" width="90"></img>
-                                <div class="col-lg-6 info">
-                                    <h4>{{ r.med.nom }} {{r.med.prenom}}</h4>
-                                    <span>{{r.daterv|date('d/m/Y à H:i')}}</span>
-                                    
-
-                                    <div class="bottom">
-                                    <a href="{{ path ('updatefr',{'id':r.id}) }}" class="btn circle btn-sm btn-gradient">report</a>
-                                     <a href="{{ path ('removefr',{'id':r.id}) }}" class="btn circle btn-sm btn-gradient">supp</a>    
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-  
+{% extends 'base.html.twig' %}
+{% block title %}liste rendez-vous
 {% endblock %}
+{% block body %}
+	<div class="breadcrumb-area gradient-bg bg-cover shadow dark text-light text-center" style="background-image: url({{asset('front/img/banner/4.jpg')}})">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<h1>Vos Rendez-Vous</h1>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumb -->
+
+	<!-- Star Doctors Area
+								    ============================================= -->
+	<div class="services-area bg-gray default-padding bottom-less">
+
+		<div class="container">
+			<div class="services-items">
+				<div class="row">
+					{% for r in rdv %}
+                    
+						<div class="services-single col-lg-6">
+
+							<div class="item">
+								<div class="info">
+									<div class="top">
+										<img src="{{asset('uploads/user/'~ r.med.image)}}">
+										<strong>{{loop.index}}</strong>
+
+									</div>
+									<h4>
+										<b>Rendez-vous avec :
+										</b>
+										<span class="widget-title">
+											Dr
+											{{ r.med.nom}}
+											{{r.med.prenom}}</span>
+									</h4>
+
+									<ul>
+										<li>Specialiste de :
+											{{r.med.specialite.namespe}}</li>
+										<li>Date du rendez-vous :
+											<br>{{r.daterv|date("d-m-Y à H:i")}}
+										</li>
+										<li>votre rendez-vous sera :
+											{{r.typerv}}</li>
+										{% if r.typerv == "Au cabinet"%}
+
+											<li>
+												situé a :
+												{{r.med.adress}}</li>
+											
+<div class="post-img">
+                                             <div class="mapouter"><div class="gmap_canvas"><iframe  id="gmap_canvas" src="https://maps.google.com/maps?q={{r.med.adress}}&t=k&z=13&ie=UTF8&iwloc=&output=embed"width="100%" height="400" frameborder="0" style="border:0" allowfullscreen  scrolling="yes" marginheight="0" marginwidth="0"></iframe><a href="https://putlocker-is.org">  </a><br>
+                                        </div>
+                                        </div>
+                                        {% else %}
+                                        
+
+										{% endif %}
+									</ul>
+									<a class="btn btn-md circle btn-gradient" href="{{ path ('updatefr',{'id':r.id}) }}">Modifier<i class="fas fa-angle-right"></i>
+									</a>
+									<a class="btn btn-md circle btn-gradient" href="{{ path ('removefr',{'id':r.id}) }}">Annuler
+										<i class="fas fa-angle-right"></i>
+									</a>
+
+								</div>
+							</div>
+
+						</div>
+
+
+					{% endfor %}
+                    
+
+
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+
+</div>{% endblock %}
