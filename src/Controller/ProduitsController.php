@@ -24,6 +24,11 @@ use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use App\Repository\ReviewRepository;
+use App\Form\ReviewType;
+use App\Entity\Review;
+
+
 use Endroid\QrCode\Writer\PngWriter;
 
 class ProduitsController extends AbstractController
@@ -124,9 +129,11 @@ class ProduitsController extends AbstractController
     #[Route('/afficher_produits_front', name: 'afficher_produits_front')]
 
     function Affiche_front(ProduitsRepository $repository,CategoriesRepository $repo, SessionInterface $session){
-        $produits= $repository->findAll();
+       
         $categories=$repo->findAll();
-
+       // $rates=$repository->get_prod_with_moy();
+    
+        $produits=$repository->findAll();
         $panier = $session->get("panier", []);
 
         // On "fabrique" les données
@@ -146,12 +153,31 @@ class ProduitsController extends AbstractController
     }
     
     #[Route('/afficher_produits_front/{id}', name: 'afficher_produits_front_details')]
-    function Affiche_frontdetails(ProduitsRepository $repository,CategoriesRepository $repo,$id){
+    function Affiche_frontdetails(ProduitsRepository $repository,CategoriesRepository $repo,$id ,ReviewRepository $rep,Request $requeste){
+        $review=new Review();
+        $review->setProduitId($id);
+        $form=$this->createForm(ReviewType::class,$review);
+        $form->handleRequest($requeste);
+        $comments=$repository->show_comment($id);
+        //$produits= $repository->get_prod_with_moy();
+
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($review);
+            $em->flush();
+            return $this->redirectToRoute('afficher_produits_front');
+
+
+        }
         $produits= $repository->find($id);
         $img="produit".$produits->getLibelle().".png";
+
         
 
-        return $this->render('produits details.html.twig',['c'=>$produits,'img'=>$img]);
+        return $this->render('produits details.html.twig',['c'=>$produits,'img'=>$img,'comments'=>$comments,'f'=>$form->createView()]);
     }
 
     #[Route('/afficher_produits_tri', name: 'afficher_produits_tri')]
@@ -176,31 +202,65 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/produits/likes/{id}", name="produits_likes")
      */
-    public function likes(Produits $produits): Response
+    public function likes(ProduitsRepository $rp,$id): Response
     {
-        $produits->setAvis(true);
+        $produits=$rp->find($id);
+        $produits->setLikes($produits->getLikes() + 1);
         $entityManager = $this->getDoctrine()->getManager();
        
         $entityManager->flush();
         
-        return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('afficher_produits_front', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
      * @Route("/produits/dislikes/{id}", name="produits_dislikes")
      */
-    public function dislikes(Produits $produits): Response
+    public function dislikes(ProduitsRepository $rp,$id): Response
     {
-        $produits->setAvis(false);
+        $produits=$rp->find($id);
+        $produits->setDislikes($produits->getDislikes() + 1);
         $entityManager = $this->getDoctrine()->getManager();
       
         $entityManager->flush();
         
-        return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('afficher_produits_front', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/filtreprix', name:'filtreprix', methods : ['POST','GET'])]
+    public function filtreprix(Request $request ,ProduitsRepository $repository,CategoriesRepository $repo, SessionInterface $session)
+    {
+        $prix=$request->get("from");
+        $prixx=$request->get("to");
+       
+        $produit=$repository->findByprixintervalle($prix,$prixx);
+        $categories=$repo->findAll();
+
+        $panier = $session->get("panier", []);
+
+        // On "fabrique" les données
+        $dataPanier = [];
+        $total = 0;
+        $panier=[];
+        foreach($panier as $id => $quantite){
+            $Produits = $repository->find($id);
+            $dataPanier[] = [
+                "produit" => $Produits,
+                "quantite" => $quantite
+            ];
+            $total += $Produits->getPrix() * $quantite;
+            
+        
+        
+    }
+    
+        return $this->render('produits/afficher_produits_front.html.twig', [
+        'produits'=>$produit,'categories'=>$categories,"dataPanier"=>$dataPanier, "total"=>$total
+    ]);
    
 
 }
 
 
 
+}

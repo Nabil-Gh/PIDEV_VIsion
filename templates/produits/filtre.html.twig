@@ -38,7 +38,7 @@
 									{% for p in dataPanier %}
 										<div class="cart-item ">
 											<div class="cart-item-details ">
-												<img src="{{asset('uploads/produit/'~ p.produit.image)}}" height ="30" width="30" alt="Goods">
+												<img src="{{asset('uploads/produit/'~ p.produit.image)}}" height ="30%" width="30%" alt="Goods">
 												<h4>{{ p.produit.libelle }}</h4>
 												<p>{{ p.produit.prix }}€</p>
 											</div>
@@ -172,14 +172,16 @@ $('.decrease-quantity').click(function () {
 						<h3 class="widget-title">Filter by price</h3>
 					<div id="slider-price"></div>
 						<div class="widget-price__title">
+
 							<strong>Price From:</strong>
-							<form action="{{path('filtreprix')}}"  method="POST">
-							<input name="from" class="widget-price__input" >
+                            <form>
+							<form action="{{path ('filtreprix')}}" novalidate="novalidate" methode="post">
+							<input name="from" class="widget-price__input" id="prix">
 							to
-							<input name="to"  class="widget-price__input" >
-							<button type="submit" class=""> submit </button>
+							<input name="to"  class="widget-price__input" id="prixx">
                             </form>
-							
+                        <a type="submit"> filtrer </a>
+                            </form>
 						</div>
 					</div>
 					<!-- end widget-price -->
@@ -223,7 +225,6 @@ $('.decrease-quantity').click(function () {
 
 					<ul class="products">
 						{% for p in produits %}
-						
 
 							<li class="products__item wow bounceInRight" data-wow-delay=".5s">
 								<a class="products__foto helper" href="shop-product.html">
@@ -231,28 +232,18 @@ $('.decrease-quantity').click(function () {
 								</a>
 								<h4 class="products__name">
 									<a href="shop-product.html">{{p.libelle}}</a>
-									
-									
+									<i class="icon icon-heart"></i>
 								</h4>
 								<div class="products__info ui-text">{{p.description}}</div>
-								<a class="fas fa-heart" href="{{ path ('produits_likes',{'id':p.id})}}">{{p.likes}}
-										</a>
-									<a class="far fa-heart" href="{{ path ('produits_dislikes',{'id':p.id}) }}">{{p.dislikes}}
-										</a>	
 								<div class="price-block clearfix">
 									
 									<span class="price-block__price">{{p.prix}}DT</span>
 								</div>
-								
 								<div class="products__btn text-center">
-									<a class="btn btn-md btn-gradient circle" href="{{ path ('add',{'id':p.id})}}">
+									<a class="btn" href="{{ path ('add',{'id':p.id})}}">
 										Add to cart</a>
-
-
-									<a class="btn btn-md btn-gradient circle" href="{{ path ('afficher_produits_front_details',{'id':p.id}) }}">
+									<a class="btn" href="{{ path ('afficher_produits_front_details',{'id':p.id}) }}">
 										details</a>
-
-									
 								</div>
 								
 							</li>

@@ -32,16 +32,16 @@ class Produits
     #[Assert\NotBlank(message:"champ obligatoire")]
     private ?float $prix = null;
 
-    #[ORM\ManyToOne(cascade:["persist","remove","merge"])] 
+    #[ORM\ManyToOne] 
     private ?Categories $type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $likes = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $dislikes = null;
 
 
