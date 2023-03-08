@@ -41,7 +41,26 @@
                
         <li><a href="javascript:void(0);" class="menu-sm"><i class="zmdi zmdi-swap"></i></a></li>        
         
-        
+        <li class="notifications badgebit">
+            <a href="javascript:void(0);">
+                <i class="zmdi zmdi-notifications"></i>
+                {% for r in rec %}
+                    {% if r.etat == "en attente" %}
+                    <div class="notify">
+                      <span class="heartbit"></span>
+                      <span class="point"></span>
+                    </div>
+
+                    {% endif %}
+                {% endfor %}
+                
+                
+
+           
+                
+                
+            </a>
+        </li>
         <li><a href="/calendrier" title="Events"><i class="zmdi zmdi-calendar"></i></a></li>
         <li><a href="mail-inbox.html" title="Inbox"><i class="zmdi zmdi-email"></i></a></li>
         <li><a href="contact.html" title="Contact List"><i class="zmdi zmdi-account-box-phone"></i></a></li>        
@@ -64,82 +83,25 @@
                     <h2><strong>Messages</strong></h2>
                 </div>
                 <div class="body">
-                    <ul class="messages list-unstyled">
+                <ul class="notification list-unstyled">
+                {% for r in rec %}
+                       {% if r.etat == "en attente" %}
                         <li>
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object rounded-circle" src="assets/images/xs/avatar1.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Alexander <small class="time">35min ago</small></span>
-                                        <p class="message">New tasks needs to be done</p>                                        
-                                    </div>
-                                </div>
-                            </a>
+                            <i class="zmdi zmdi-assignment"></i>
+                            <strong>{{r.user.prenom}} {{r.user.nom}}</strong>
+                            <p class="message">{{r.type}}</p>
+                            
+                            <p><a href="{{ path ('reponseajout',{'id':r.id}) }}">Traite la Reclamation</a></p>
+
+                            <small class="text-muted">{{r.date|date("d/m/Y")}}</small>
                         </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object rounded-circle" src="assets/images/xs/avatar2.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Grayson <small class="time">1hr ago</small></span>
-                                        <p class="message">New tasks needs to be done</p>                                        
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object rounded-circle" src="assets/images/xs/avatar3.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Sophia <small class="time">31min ago</small></span>
-                                        <p class="message">New tasks needs to be done</p>                                        
-                                    </div>
-                                </div>
-                            </a>
-                        </li>        
-                    </ul>  
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                   
                 </div>
             </div>
-            <div class="card">
-                <div class="header">
-                    <h2><strong>Notifications</strong></h2>
-                </div>
-                <div class="body">
-                    <ul class="notification list-unstyled">
-                        <li>
-                            <i class="zmdi zmdi-balance-wallet text-success"></i>
-                            <strong>+$30 New sale</strong>
-                            <p><a href="javascript:void(0)">Admin Template</a></p>
-                            <small class="text-muted">7 min ago</small>
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-edit text-info"></i>
-                            <strong>You Edited file</strong>
-                            <p><a href="javascript:void(0)">Docs.doc</a></p>
-                            <small class="text-muted">15 min ago</small>
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-delete text-danger"></i>
-                            <strong>Project removed</strong>
-                            <p><a href="javascript:void(0)">AdminX BS4</a></p>
-                            <small class="text-muted">1 hours ago</small>
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-account text-success"></i>
-                            <strong>New user</strong>
-                            <p><a href="javascript:void(0)">UI Designer</a></p>
-                            <small class="text-muted">1 hours ago</small>
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-flag text-warning"></i>
-                            <strong>Alpino v1.0.0 is available</strong>
-                            <p><a href="javascript:void(0)">Update now</a></p>
-                            <small class="text-muted">5 hours ago</small>
-                        </li>
-                    </ul>  
-                </div>
-            </div>
+           
         </div>
     </div>
     <div class="task-menu">

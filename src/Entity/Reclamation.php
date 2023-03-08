@@ -26,13 +26,13 @@ class Reclamation
     #[Assert\Length(min:10,minMessage:"il faut un Minimum de 10 lettres")]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE , nullable : true)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable : true)]
     private ?string $etat = null;
 
     #[ORM\ManyToOne]

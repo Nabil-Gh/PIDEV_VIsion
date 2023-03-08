@@ -54,13 +54,15 @@ class ReclamationRepository extends ServiceEntityRepository
         ;
     }
 
-//    public function findOneBySomeField($value): ?Reclamation
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    
+
+    public function findbynontraite($value): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.etat = :val')
+            ->setParameter('val',$value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

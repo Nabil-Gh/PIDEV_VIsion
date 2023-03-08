@@ -20,6 +20,7 @@ class ReponseController extends AbstractController
     public function ajoutrep(Request $request,ReclamationRepository $rp,$id,ManagerRegistry $doctrine): Response
     {
         $em= $doctrine->getManager();
+        $rec= $rp->findAll();
         $reclamation= $doctrine->getRepository(Reclamation::class)->find($id);
         $reponse=new Reponse();
         $form=$this->createForm(ReponseformType::class,$reponse);
@@ -29,9 +30,12 @@ class ReponseController extends AbstractController
 
             $reponse->setDateCreation(new \DateTime("now"));
             $reponse->setIdRec($reclamation);
-            
+            $reclamation->setEtat("traite");
             $em->persist($reponse);
             $em->flush();
+           
+
+
             return $this->redirectToRoute("afficher_reclamation");
 
         }
@@ -39,6 +43,7 @@ class ReponseController extends AbstractController
       
         return $this->render('reclamation/reponse.html.twig', [
             'f' => $form->createView(),
+            'rec'=>$rec
         ]);
     }
 

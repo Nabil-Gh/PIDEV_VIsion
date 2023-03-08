@@ -48,8 +48,11 @@
                             
                            
                         </div>
+                         <a class="btn btn-md btn-gradient circle"  href="{{ path ('afficherrep',{'id':r.id}) }}">Afficher Reponse <i class="fas fa-angle-right"></i></a>
+                    <a class="btn btn-md btn-gradient circle"  href="{{ path ('imp',{'id':r.id}) }}">Imprimer <i class="fas fa-angle-right"></i></a>
+
                     </div>
-                    <a class="btn btn-md btn-gradient circle"  href="{{ path ('afficherrep',{'id':r.id}) }}">Afficher Reponse <i class="fas fa-angle-right"></i></a>
+                   
                     {% endfor %}
                     <!-- End Single Item -->
                     <!-- Single Item -->

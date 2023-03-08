@@ -11,6 +11,9 @@ use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\UserRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Knp\Snappy\Pdf;
 
 class ReclamationController extends AbstractController
 {
@@ -78,4 +81,67 @@ class ReclamationController extends AbstractController
          
         ] );
     }
+    #[Route('/f/afficher_reclamation/nontraité', name: 'afficher_reclamation_user_nontraité')]
+    public function afficher_reclamation_user_nontraité(ReclamationRepository $repository,UserRepository $urp): Response
+    {
+        $rec=$repository->findAll();
+        $recs=$repository->findbynontraite("en attente");
+        return $this->render('reclamation/nontraité.html.twig',[
+            'rec' => $rec,
+            'recs'=>$recs
+            
+         
+        ] );
+
+    }
+    #[Route('/f/afficher_reclamation/traité', name: 'afficher_reclamation_user_traité')]
+    public function afficher_reclamation_user_traité(ReclamationRepository $repository,UserRepository $urp): Response
+    {
+        $rec=$repository->findAll();
+        $recs=$repository->findbynontraite("traite");
+        return $this->render('reclamation/traité.html.twig',[
+            'rec' => $rec,
+            'recs'=>$recs
+            
+         
+        ] );
+
+    }
+
+
+
+    /**
+     * @Route ("/Imprimer/{id}" ,name="imp")
+     */
+
+     public function pdf($id,ReclamationRepository $repository)
+     {
+         // Configure Dompdf according to your needs
+         $pdfOptions = new Options();
+         $pdfOptions->set('defaultFont', 'Arial');
+ 
+         // Instantiate Dompdf with our options
+         $dompdf = new Dompdf($pdfOptions);
+         $reclamation=$repository->find($id);
+ 
+         $html = $this->renderView('reclamation/imp_pdf.html.twig',
+             ['reclamation' => $reclamation
+             ]);
+         // Load HTML to Dompdf
+         $dompdf->loadHtml($html);
+ 
+         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+         $dompdf->setPaper('A4', 'portrait');
+ 
+ 
+         // Render the HTML as PDF
+         $dompdf->render();
+         $pdfFilePath = 'C:/Users/hp/Downloads/aziiz.pdf';
+         file_put_contents($pdfFilePath, $dompdf->output());
+         $response = new Response(file_get_contents($pdfFilePath));
+         $response->headers->set('Content-Type', 'application/pdf');
+         $response->headers->set('Content-Disposition', 'attachment; filename="document.pdf"');
+         return $response;
+            }
+ 
 }
