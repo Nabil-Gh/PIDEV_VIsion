@@ -18,6 +18,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Validator\Constraints\Json;
 use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 
 
 class MobileController extends  AbstractController
@@ -25,7 +27,7 @@ class MobileController extends  AbstractController
 
 
      /**
-      * @Route("/ajout_user", name="ahout_user")
+      * @Route("/ajout_user", name="ajout_user")
       * @Method("POST")
       */
 
@@ -108,7 +110,10 @@ class MobileController extends  AbstractController
  
          $user = $UserRepository->find($request->get('id'));
         
-        
+         $user->setAdress($request->get('nom'));
+         $user->setAdress($request->get('prenon'));
+         $user->setAdress($request->get('adress'));
+
          $user->setTelephone($request->get('telephone'));
          $user->setAdress($request->get('adress'));
          $user->setPassword(
@@ -146,6 +151,35 @@ class MobileController extends  AbstractController
           
            
       }
+      
+     
+     /**
+     * @Route("login_mob",name="app_loginmobile")
+     */
+
+     public function signinAction(Request $request){
+
+        $email = $request->query->get("email");
+        $password = $request->query->get("password");
+        $em= $this->getDoctrine()->getManager();
+        $client= $em->getRepository(\App\Entity\User::class)->findOneByEmail($email);// find user by username
+        if($client){
+            if(password_verify($password,$client->getPassword())) {
+                $serializer = new Serializer([new ObjectNormalizer()]);
+                $formatted = $serializer->normalize($client);
+                return new JsonResponse($formatted);
+            }
+            else{
+                return new Response("password not found");
+            }
+
+        }
+        else{
+            return new Response("user not found");
+
+        }
+    }
+    
  
  
 

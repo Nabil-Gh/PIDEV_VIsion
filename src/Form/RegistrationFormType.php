@@ -115,6 +115,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            
         ;
         $builder->get('Roles')
         ->addModelTransformer(new CallbackTransformer(

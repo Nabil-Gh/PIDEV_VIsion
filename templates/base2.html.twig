@@ -47,12 +47,14 @@
             <a href="javascript:void(0);">
                 <i class="zmdi zmdi-notifications"></i>
                 {% for u in user %}
+                    {% if u.roles[0] != "ROLE_USER" %}
+
                     {% if u.isactivated == 0 %}
                     <div class="notify">
                       <span class="heartbit"></span>
                       <span class="point"></span>
                     </div>
-
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 
@@ -88,6 +90,7 @@
                 <div class="body">
                     <ul class="notification list-unstyled">
                     {% for u in user %}
+                    {% if u.roles[0] != "ROLE_USER" %}
                        {% if u.isactivated == 0 %}
                         <li>
                             <i class="zmdi zmdi-assignment"></i>
@@ -98,6 +101,7 @@
 
                             <small class="text-muted">{{u.datecr|date("d/m/Y")}}</small>
                         </li>
+                        {% endif %}
                         {% endif %}
                         {% endfor %}
                     </ul>  

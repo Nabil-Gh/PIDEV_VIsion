@@ -57,9 +57,11 @@
                                         <hr>
                                          <small class="text-muted"> Type</small>
                                         <p>{{user1.roles[0]}}</p>
-                                        <hr>
+
                                        
-                                        <a class="button button-small edit" title="Delete" href="{{ path ('supprimer_user',{'id':user1.id}) }}"><i class="zmdi zmdi-delete"></i>   Refuser</a></td>
+                                        <a class="btn btn-danger" title="Delete" href="{{ path ('supprimer_user',{'id':user1.id}) }}">  Refuser</a></td>
+                                        <a class="btn btn-success" title="Delete" href="{{ path ('activer_user',{'id':user1.id}) }}">   Refuser</a></td>
+
                                         
                                     </div>
                                 </div>

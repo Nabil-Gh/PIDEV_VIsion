@@ -95,9 +95,9 @@ class UserController extends AbstractController
         ->setBody(
             "Mr " . $user->getPrenom(). $user->getNom() . " , Votre email a été bloqué "
         );
-        $mailer->send($message);
+        //$mailer->send($message);
         $em->flush();
-        return $this->redirectToRoute('afficher_user');
+        return $this->redirectToRoute('dashboard');
        
     }
     #[Route('/admin/user/activer/{id}', name: 'activer_user')]
@@ -116,10 +116,10 @@ class UserController extends AbstractController
             "Mr " . $user->getPrenom(). $user->getNom() . " , Votre email a été activé avec succée"
         );
 
-        $mailer->send($message);
+        //$mailer->send($message);
         
         $em->flush();
-        return $this->redirectToRoute('afficher_user');
+        return $this->redirectToRoute('dashboard');
        
     }
     #[Route('/admin/ajout_specialite', name: 'ajout_specialite')]

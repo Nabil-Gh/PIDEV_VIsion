@@ -35,6 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+
     #[ORM\Column]
     #[Assert\Type("integer",message:"doit contenir que des chiffres")]
     #[Assert\Length(min:8,max:13,minMessage:"il faut Minimum 8 chiffres",maxMessage:"il faut Maximum 13 chiffres")]
@@ -65,8 +66,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min:2,max:20,minMessage:"il faut 2 Lettres",maxMessage:"il faut Maximum 20 Lettres")]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $id_fiche = null;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $isVerified = false;
@@ -81,8 +80,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\ManyToOne(targetEntity: Specialite::class,cascade:["persist","remove","merge"])]
+    #[ORM\ManyToOne(inversedBy:'users')]
     private ?Specialite $specialite = null;
+
+
+    #[ORM\Column(nullable: true)]
+    private ?string $resetToken = null;
+
 
     public function getId(): ?int
     {
@@ -259,17 +263,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIdFiche(): ?string
-    {
-        return $this->id_fiche;
-    }
-
-    public function setIdFiche(?string $id_fiche): self
-    {
-        $this->id_fiche = $id_fiche;
-
-        return $this;
-    }
+    
 
     public function isVerified(): bool
     {
@@ -315,6 +309,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+  
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }

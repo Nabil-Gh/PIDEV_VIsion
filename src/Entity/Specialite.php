@@ -22,7 +22,7 @@ class Specialite
 
     private ?string $namespe = null;
 
-    #[ORM\OneToMany(mappedBy: 'specialite', targetEntity: User::class)]
+    #[ORM\OneToMany(mappedBy: 'specialite', targetEntity: User::class,orphanRemoval:true)]
     private Collection $users;
 
     public function __construct()
