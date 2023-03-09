@@ -47,16 +47,28 @@
 	height: 100%;
 	content: '';
 }
+<<<<<<< HEAD
 .bg_transparent.bg_1:after {background-color: #21AAC4;}
 .bg_transparent.bg_2:after {background-color: rgba(0, 0, 0, 0.92);}
 .bg_transparent.bg_3:after {background-color: #21AAC4;}
 .bg_transparent.bg_5:after {background-color: rgba(41, 134, 226, 0.8);}
 .bg_transparent.bg_6:after {background-color: #2986e2cc;}
+=======
+.bg_transparent.bg_1:after {background-color: rgba(41, 134, 226, 0.8);}
+.bg_transparent.bg_2:after {background-color: rgba(0, 0, 0, 0.92);}
+.bg_transparent.bg_3:after {background-color: rgba(255, 118, 3, 0.78);}
+.bg_transparent.bg_5:after {background-color: rgba(41, 134, 226, 0.8);}
+.bg_transparent.bg_6:after {background-color: rgba(41, 134, 226, 0.8);}
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 .bg_transparent.bg_7:after {background-color: rgba(255, 255, 255, 0.87);}
 .bg_transparent.bg_8:after {background-color: rgba(0, 0, 0, 0.88);}
 .bg_transparent.bg_9:after {height: 482px; background-color: #f2f7f9;}
 .bg_transparent.bg_10:after {height: 475px; background-color: rgba(0, 0, 0, 0.88);}
+<<<<<<< HEAD
 .bg_transparent.bg_title:after {background-color: #21AAC4;}
+=======
+.bg_transparent.bg_title:after {background-color: rgba(41, 134, 226, 0.8);}
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 
 
 .padd_left_20 {padding-left: 20px;}

@@ -1,0 +1,56 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Ajouter une Agence{% endblock %}
+
+{% block body %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Liste des Pharmacies</h2>
+                    <ul class="breadcrumb padding-0">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item active">Liste des Pharmacies</li>
+                    </ul>
+                </div>            
+               
+            </div>
+        </div>
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+		<div class="header">
+			<h2>Ajouter une <strong>Agence</strong></h2>
+			
+		</div>
+		<div class="body">
+            {{ form_start(f,{'attr':{'novalidate':'novalidate'}}) }}
+			
+         
+                {{ form_label(f.namespe, 'Le Nom de l Agence' ) }}
+				
+				<div class="form-group">
+                {{ form_widget(f.namespe,  {'attr': { 'class':'form-control', 'placeholder': 'Nom'}}) }}
+                <span class="text-danger" >{{ form_errors(f.namespe,{'attr': {'class':'text-danger'}}) }}</span>
+					
+				</div>
+                
+               <button type="submit" class="btn btn-primary">ajouter</button>
+				
+			{{ form_end(f) }}
+		</div>
+	</div>
+            </div>
+        </div>
+        <!-- #END# Basic Examples --> 
+        
+        <!-- #END# Exportable Table --> 
+    </div>
+</section>
+	
+
+{% endblock %}

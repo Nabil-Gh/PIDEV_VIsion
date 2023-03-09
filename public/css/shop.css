@@ -132,7 +132,11 @@
 	right: 23px;
 	font-size: 20px;
 	font-weight: 700;
+<<<<<<< HEAD
 	color: #0cb8b6;
+=======
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .price-block__name {
 	display: table-cell;
@@ -147,7 +151,11 @@
 	font-size: 9px;
 	color: #fff;
 	border-radius: 12px;
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	text-align: center;
 }
 .products__btn {
@@ -160,7 +168,11 @@
 	padding: 13px 30px;
 	font-size: 11px;
 	font-weight: 400;
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #2986e2;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 
 .sorting-title {
@@ -277,7 +289,11 @@
 	margin-top: 35px;
 	padding: 18px 65px 18px;
 	border-radius: 30px;
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .product-card .nav-tabs {
 	margin-top: 52px;
@@ -368,7 +384,11 @@
 	cursor: pointer;
 }
 .carousel-product .slides li.flex-active-slide {
+<<<<<<< HEAD
 	border: 1px solid #21AAC4;
+=======
+	border: 1px solid #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .slider-product .slides li {
 	position: relative;

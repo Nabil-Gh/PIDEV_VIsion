@@ -1,0 +1,295 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}dashboard{% endblock %}
+{% block javascript %}
+
+
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{asset('assets/plugins/morrisjs/morris.css')}}" />
+<section class="content home">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Dashboard</h2>
+                    <ul class="breadcrumb padding-0">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i></a></li>
+                        <li class="breadcrumb-item active">Admin</li>
+                    </ul>
+                </div>            
+                
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-6">
+                <div class="card text-center">
+                    <div class="body">
+                        <p class="m-b-20"><i class="zmdi zmdi-account-box zmdi-hc-3x "></i></p>
+                        <span>Nombre </br>d'utilisateur</span>
+                        <h3 class="m-b-10"><span class="number count-to" data-from="0" data-to="{{user|length}}" data-speed="2000" data-fresh-interval="700">{{user|length}}</span></h3>
+                        
+                    </div>
+                </div>
+            </div>
+            {% set i = 0 %}
+            {% set f = 0 %}
+            {% set mm = 0 %}
+            {% set pm = 0 %}
+            {% set um = 0 %}
+            {% set m = 0 %}
+            {% set p = 0 %}
+            {% for u in user %}
+                {% if u.roles[0] == "ROLE_MEDECIN" %}
+                    {% set m = m + 1 %}
+                    {% if u.sexe == "homme" %}
+                        {% set mm = mm + 1 %}
+                    {% endif %}
+                {% endif %}
+                {% if u.roles[0] == "ROLE_PHARMACIE" %}
+                    {% set p = p + 1 %}
+                    {% if u.sexe == "homme" %}
+                        {% set pm = pm + 1 %}
+                    {% endif %}
+                {% endif %}
+                {% if u.isactivated == 0 %}
+                    {% set i = i + 1 %}
+                {% endif %}
+                {% if u.sexe == "homme" %}
+                    {% set um = um + 1 %}
+                {% endif %}
+                {% if u.sexe == "femme" %}
+                    {% set f = f + 1 %}
+                {% endif %}
+
+            {% endfor %}
+             <div class="col-lg-2 col-md-6">
+                <div class="card text-center">
+                    <div class="body">
+                        <p class="m-b-20"><i class="fa-solid fa-user zmdi-hc-3x "></i></p>
+                        <span>Nombre de</br> Patient</span>
+                        <h3 class="m-b-10 number count-to" data-from="0" data-to="{{user|length - p - m }}" data-speed="2000" data-fresh-interval="700"></h3>
+                        
+                    </div>
+                </div> 
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="card text-center">
+                    <div class="body">
+                        <p class="m-b-20"><i class="zmdi zmdi-account-box zmdi-hc-3x col-red"></i></p>
+                        <span>Nombre de compte désactivé</span>
+                        <h3 class="m-b-10 number count-to" data-from="0" data-to="{{i}}" data-speed="2000" data-fresh-interval="700"></h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="card text-center">
+                    <div class="body">
+                        <p class="m-b-20"><i class="zmdi zmdi-account-box zmdi-hc-3x col-green"></i></p>
+                        <span>Nombre de compte activé </span>
+                        <h3 class="m-b-10 number count-to" data-from="0" data-to="{{user|length - i}}" data-speed="2000" data-fresh-interval="700"></h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="card text-center">
+                    <div class="body">
+                        <p class="m-b-20"><i class="fa-solid fa-stethoscope zmdi-hc-3x"></i></p>
+                        <span>Nombre de</br> Médecin</span>
+                        <h3 class="m-b-10 number count-to" data-from="0" data-to="{{m}}" data-speed="2000" data-fresh-interval="700"></h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="card text-center">
+                    <div class="body">
+                        <p class="m-b-20"><i class="fa-solid fa-prescription-bottle-medical zmdi-hc-3x col-green"></i></p>
+                        <span>Nombre de</br> Pharmacie</span>
+                        <h3 class="m-b-10 number count-to" data-from="0" data-to="{{p}}" data-speed="2000" data-fresh-interval="700"></h3>
+                        
+                    </div>
+                </div>
+            </div>
+           
+        </div>        
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-12">
+                <div class="card visitors-map">
+                    <div class="header">
+                        <h2><strong>Sexe</strong> des Utilisateurs</h2>
+                      
+                    </div>
+                    <div class="body m-b-10">
+                        <div id="m_bar_chart"></div>
+                    </div>
+   
+    
+                        
+                    
+                  
+                </div>
+            </div>
+             <script >
+    $(document).ready(function() {
+    Morris.Bar({
+        element: 'm_bar_chart',
+        data: [{
+            y: 'Utilisateur',
+            Homme: {{um}},
+            Femme: {{user|length}} - {{um}},
+        }, {
+            y: 'Patient',
+            Homme: {{um - mm - pm}},
+            Femme: {{f - (m-mm) - (p-pm) }},
+        }, {
+            y: 'Médecin',
+            Homme: {{mm}},
+            Femme: {{m - mm }},
+        }, {
+            y: 'Pharmacien',
+            Homme: {{pm}},
+            Femme: {{ p - pm }},
+        }],
+        xkey: 'y',
+        ykeys: ['Homme', 'Femme'],
+        labels: ['Homme', 'Femme'],
+        barColors: ['#ADD8E6', '#FFB6C1'],
+        hideHover: 'auto',
+        gridLineColor: '#eef0f2',
+        resize: true
+        });
+    });
+
+    </script>
+            <div class="col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Etat</strong> des comptes</h2>
+                        
+                    </div>
+                    <div class="body m-b-10">
+                        <div id="cercle_chart"></div>
+                    </div>
+              
+                </div>
+            </div>
+         <script >
+    $(document).ready(function() {
+     Morris.Donut({
+        element: 'cercle_chart',
+        data: [
+        {
+            label: "Activé",
+            value: {{user|length - i}},
+
+        }, {
+            label: "Désactivé",
+            value: {{i}}
+        }],
+
+        resize: true,
+        colors: ['#00FF00 ', '#FF0000']
+    });
+    });
+
+    </script> 
+     </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card visitors-map">
+                    <div class="header">
+                        <h2><strong>Visit</strong> & Sales Statistics</h2>
+                        <ul class="header-dropdown">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
+                                <ul class="dropdown-menu slideUp">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else</a></li>
+                                    <li><a href="javascript:void(0);" class="boxs-close">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body m-b-10">
+                        <div id="m_area_chart"></div>
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12">
+                                <div id="world-map-markers2" class="m-b-10"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover m-b-0">
+                                        <tbody>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle col-cyan"></i></th>
+                                                <td>USA</td>
+                                                <td><span>862 Records</span></td>
+                                                <td><span>35% <i class="zmdi zmdi-caret-up"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle"></i></th>
+                                                <td>Canada</td>
+                                                <td><span>451 Records</span></td>
+                                                <td><span>15% <i class="zmdi zmdi-caret-up"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle text-warning"></i></th>
+                                                <td>India</td>
+                                                <td><span>502 Records</span></td>
+                                                <td><span>20% <i class="zmdi zmdi-caret-down"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle text-info"></i></th>
+                                                <td>Australia</td>
+                                                <td><span>502 Records</span></td>
+                                                <td><span>20% <i class="zmdi zmdi-caret-up"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle text-danger"></i></th>
+                                                <td>UK</td>
+                                                <td><span>237 Records</span></td>
+                                                <td><span>10% <i class="zmdi zmdi-caret-up"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle"></i></th>
+                                                <td>France</td>
+                                                <td><span>237 Records</span></td>
+                                                <td><span>10% <i class="zmdi zmdi-caret-down"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle"></i></th>
+                                                <td>Germany</td>
+                                                <td><span>237 Records</span></td>
+                                                <td><span>10% <i class="zmdi zmdi-caret-up"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle"></i></th>
+                                                <td>China</td>
+                                                <td><span>237 Records</span></td>
+                                                <td><span>10% <i class="zmdi zmdi-caret-down"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th><i class="zmdi zmdi-circle col-purple"></i></th>
+                                                <td>USE</td>
+                                                <td><span>237 Records</span></td>
+                                                <td><span>10% <i class="zmdi zmdi-caret-down"></i></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>              
+    </div>
+</section>
+
+{% endblock %}

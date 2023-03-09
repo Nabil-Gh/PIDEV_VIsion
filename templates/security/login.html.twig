@@ -1,0 +1,110 @@
+<!doctype html>
+<html class="no-js " lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+		<title>LOGIN</title>
+		<!-- Favicon-->
+		<link rel="icon" type="image/x-icon" href="{{asset('img/dologo_s.png')}}">
+		<link
+		rel="stylesheet" href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+
+		<!-- Custom Css -->
+		<link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
+	</head>
+
+	<body class="theme-cyan">
+		<div class="authentication">
+			<div class="container">
+				<div class="col-md-12 content-center">
+					<div class="row">
+						<div class="col-lg-4 col-md-12 content-center">
+                   			<div class="company_detail">
+                        		<h4 class="logo1"><img src="assets/images/dologo_light.png" height="70" > </h4>
+                       			<h3><strong>DoCare</strong> la ou la santé rencontre la technonogie</h3>
+                        
+                      		  	<div class="footer">
+                            
+                           		 	<hr>
+                           		 	<ul>
+                                
+                               			<li><a href="" target="_blank">Acceuil</a></li>
+                               			<li><a href="" target="_blank">A propos</a></li>
+                               			<li><a href="" target="_blank">Services</a></li>
+                                
+                            		</ul>
+                       			</div>
+                    		</div>                    
+                		</div>
+               			<div class="col-lg-1 ">
+            		    </div>
+						<div class="col-lg-5 col-md-12 offset-lg-1">
+							<div class="card-plain">
+								<div class="header">
+									<h5>Log in</h5>
+								</div>
+								<form class="form" method="post">
+									{% if error %}
+										<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+									{% endif %}
+
+									{% if app.user %}
+										<div class="mb-3">
+											You are logged in as
+											{{ app.user.userIdentifier }},
+											<a href="{{ path('app_logout') }}">Logout</a>
+										</div>
+									{% endif %}
+
+									<div class="input-group">
+										
+									    <input type="email" value="{{ last_username }}" placeholder="EMAIL" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+										<span class="input-group-addon">
+											<i class="zmdi zmdi-account-circle"></i>
+										</span>
+									</div>
+									<div class="input-group">
+										<input type="password" name="password" placeholder="password"  id="inputPassword" class="form-control" autocomplete="current-password" required>
+										<span class="input-group-addon">
+											<i class="zmdi zmdi-lock"></i>
+										</span>
+									</div>
+									<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+									{#
+									        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+									        See https://symfony.com/doc/current/security/remember_me.html
+									
+									        <div class="checkbox mb-3">
+									            <label>
+									                <input type="checkbox" name="_remember_me"> Remember me
+									            </label>
+									        </div>
+									    #}
+
+									<button class="btn btn-primary btn-round btn-block" type="submit">se Connecter</button>
+								</form>
+								
+								<div class="footer">
+									
+									<a href="sign_up" class="btn btn-primary btn-simple btn-round btn-block">S'inscrire</a>
+								</div>
+								<a href="{{ path ('fp') }}" class="link">Forgot Password?</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Jquery Core Js -->
+		<script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script>
+		<script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script>
+		<!-- Lib Scripts Plugin Js -->
+	</body>
+</html>

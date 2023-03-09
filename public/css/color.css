@@ -3,6 +3,7 @@
 /*//////////////////////////////////////////////////////////////////////////////////////////*/
 
 
+<<<<<<< HEAD
 .color_primary {color: #21AAC4;}
 .bg-color_primary {background-color: #21AAC4;}
 .color_second {color: #2F92F1;}
@@ -12,3 +13,14 @@
 .bg-color_primary_hov:hover {background-color: #21AAC4;}
 .color_second_hov:hover {color: #2F92F1;}
 .bg-color_second_hov:hover {background-color: #2F92F1;}
+=======
+.color_primary {color: #f26529;}
+.bg-color_primary {background-color: #f26529;}
+.color_second {color: #2986e2;}
+.bg-color_second {background-color: #2986e2;}
+
+.color_primary_hov:hover {color: #f26529;}
+.bg-color_primary_hov:hover {background-color: #f26529;}
+.color_second_hov:hover {color: #2986e2;}
+.bg-color_second_hov:hover {background-color: #2986e2;}
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213

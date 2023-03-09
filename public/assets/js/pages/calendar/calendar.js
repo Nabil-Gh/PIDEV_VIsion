@@ -2,7 +2,11 @@
 $('#calendar').fullCalendar({
     header: {
         left: 'prev,next today',
+<<<<<<< HEAD
         center: 'title',
+=======
+        center: 'title', 
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         right: 'month,agendaWeek,agendaDay,listWeek'
     },
     defaultDate: '2018-03-12',

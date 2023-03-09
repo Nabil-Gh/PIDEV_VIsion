@@ -27,7 +27,11 @@
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 1.3;
+<<<<<<< HEAD
 	color: #0cb8b6;
+=======
+	color: #2986e2;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	border-bottom: 1px solid #eee;
 	text-transform: uppercase;
 }
@@ -97,8 +101,13 @@
 }
 .widget-cloud .wp-tag-cloud > li > a:hover {
 	color: #fff;
+<<<<<<< HEAD
 	border-color: #21AAC4;
 	background-color: #21AAC4;
+=======
+	border-color: #f26529;
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	text-decoration: none;
 }
 .widget-text {
@@ -260,7 +269,11 @@
 	text-decoration: none;
 }
 .post .footer-panel a:hover {
+<<<<<<< HEAD
 	color: #0cb8b6;
+=======
+	color: #2986e2;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .post .social-links {
 	border-top: 1px solid #eee;
@@ -293,17 +306,28 @@
 	transition: all 0.3s;
 }
 .post .social-links a:hover {
+<<<<<<< HEAD
 	border-color: #0cb8b6;
 }
 .post .social-links a:hover .icon {
 	color: #21AAC4;
+=======
+	border-color: #2986e2;
+}
+.post .social-links a:hover .icon {
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 
 
 .about-autor {
 	padding: 35px 40px;
 	color: #fff;
+<<<<<<< HEAD
 	border-bottom: 4px solid #21AAC4;
+=======
+	border-bottom: 4px solid #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .about-autor__foto {
 	float: left;
@@ -399,7 +423,11 @@
 	margin-right: 3px;
 	font-size: 12px;
 	font-style: normal;
+<<<<<<< HEAD
 	color: #0cb8b6;
+=======
+	color: #526aff;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .comment .comment-reply {
 	position: absolute;
@@ -410,7 +438,11 @@
 	background-color: #fff;
 }
 .comment .comment-reply .btn:hover {
+<<<<<<< HEAD
 	background-color: #0cb8b6;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .comment .comment-reply .btn:hover .icon {
 	transition: all 0.3s;

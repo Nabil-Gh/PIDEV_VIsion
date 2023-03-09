@@ -7,12 +7,19 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+<<<<<<< HEAD
+=======
+        "captcha-com/symfony-captcha-bundle": "4.*",
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+<<<<<<< HEAD
         "endroid/qr-code-bundle": "^4.3",
         "ob/highcharts-bundle": "^1.7",
+=======
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.1",
@@ -24,6 +31,10 @@
         "symfony/flex": "^1.17|^2",
         "symfony/form": "5.4.*",
         "symfony/framework-bundle": "5.4.*",
+<<<<<<< HEAD
+=======
+        "symfony/google-mailer": "5.4.*",
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         "symfony/http-client": "5.4.*",
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
@@ -37,11 +48,19 @@
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
+<<<<<<< HEAD
+=======
+        "symfony/swiftmailer-bundle": "^3.5",
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         "symfony/translation": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
+<<<<<<< HEAD
+=======
+        "symfonycasts/verify-email-bundle": "^1.13",
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -50,8 +69,12 @@
             "composer/package-versions-deprecated": true,
             "php-http/discovery": true,
             "symfony/flex": true,
+<<<<<<< HEAD
             "symfony/runtime": true,
             "endroid/installer": true
+=======
+            "symfony/runtime": true
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         },
         "optimize-autoloader": true,
         "preferred-install": {

@@ -9,9 +9,15 @@ $(function() {
 // Morris-chart
 function MorrisArea() {
     Morris.Area({
+<<<<<<< HEAD
         element: 'm_area_chart',
         data: [{
                 period: '2011',
+=======
+        element: 'nabil_chart',
+        data: [{
+                period: '2005',
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
                 iphone: 45,
                 ipad: 75,
                 itouch: 18

@@ -1,0 +1,64 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Liste des Spécialités{% endblock %}
+
+{% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Liste des Spécialités</h2>
+                    <ul class="breadcrumb padding-0">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item active">Liste des Spécialités</li>
+                    </ul>
+                </div>            
+               
+            </div>
+        </div>
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2> Liste des <strong>Spécialités</strong> </h2>
+                        
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Nom </th>
+                                        <th>Option</th>
+                                        
+                                    </tr>
+                                </thead>
+                               
+                                <tbody>
+                                {% for s in spec %}
+                                  
+                                    <tr>
+                                        <td> {{s.namespe}}</td>
+                                        
+                                        
+                                        <td><a class="button button-small edit" title="Delete" href="{{ path ('supprimer_specialite',{'id':s.id}) }}"><i class="zmdi zmdi-delete"></i>   Supprimer</a></td>
+                                        
+                                    </tr>
+                                    
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Basic Examples --> 
+        
+        <!-- #END# Exportable Table --> 
+    </div>
+</section>
+{% endblock %}

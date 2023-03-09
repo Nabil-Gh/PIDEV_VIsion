@@ -1,0 +1,88 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Liste des Médecins{% endblock %}
+
+{% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Liste des Médecins</h2>
+                    <ul class="breadcrumb padding-0">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item active">Liste des Médecins</li>
+                    </ul>
+                </div>            
+               
+            </div>
+        </div>
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2> Liste des <strong>Médecin</strong> </h2>
+                        
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Nom </th>
+                                        <th>Email</th>
+                                        <th>Telephone</th>
+                                        <th>Specialite</th>
+                                        <th>Date de Naissance</th>
+                                        <th>sexe</th>
+                                        <th>Date d'adhesion</th>
+                                        <th>Etat</th>
+                                        <th>supprimer</th>
+                                    </tr>
+                                </thead>
+                               
+                                <tbody>
+                                {% for a in user %}
+                                  {% if a.roles[0]=="ROLE_MEDECIN" %} 
+                                    <tr>
+                                        <td>{{a.prenom}} {{a.nom}}</td>
+                                        <td>{{a.email}}</td>
+                                        <td>{{a.telephone}}</td>
+                                        
+                                        <td> {{a.specialite.namespe}}</td>
+                                        
+                                        
+                                        
+                                        <td>{{a.daten|date("d/m/Y")}}</td>
+                                        <td>{{a.sexe}}</td>
+                                        <td>{{a.datecr|date("d/m/Y")}}</td>
+                                        
+                                        <td>
+                                         {% if a.isactivated == 0 %}
+                                        <a href="{{ path ('activer_user',{'id':a.id}) }}" class="badge badge-primary">Bloqué</a>
+                                        {% elseif a.isactivated == 1 %}
+                                        <a  href="{{ path ('bloquer_user',{'id':a.id}) }}" class="badge badge-success">Activé</a>
+
+                                        {% endif %}
+                                        </td>
+                                        
+                                        <td><a class="button button-small edit" title="Delete" href="{{ path ('supprimer_user',{'id':a.id}) }}"><i class="zmdi zmdi-delete"></i>   Supprimer</a></td>
+                                        
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Basic Examples --> 
+        
+        <!-- #END# Exportable Table --> 
+    </div>
+</section>
+{% endblock %}

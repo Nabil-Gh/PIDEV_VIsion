@@ -1,0 +1,4 @@
+<p>Bonjour {{ user.prenom }} {{ user.nom }}</p>
+<p>Vous Avez une reinitialisation de votre mot de passe</p>
+<p>Pour reinitialiser votre mot de passe, ciliquer sur ce lien:</p>
+<p><a href="{{ url('reset_password', { 'token': token }) }}">{{ url('reset_password', { 'token': token }) }}</a></p>

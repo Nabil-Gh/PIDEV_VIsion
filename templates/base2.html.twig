@@ -12,12 +12,22 @@
 <link rel="stylesheet" href="{{asset('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css')}}"/>
 <script src="{{asset('https://kit.fontawesome.com/7e76930a12.js')}}" crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
+=======
+<script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
+<script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js')}}"></script>
+<link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css')}}">
+
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
 
+<<<<<<< HEAD
 <!-- table belha -->
 <link rel="stylesheet" href="{{asset('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
+=======
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 
 </head>
 <body class="theme-black">
@@ -36,11 +46,16 @@
     <ul class="menu_list">
         <li>
             <a href="javascript:void(0);" class="bars"></a>
+<<<<<<< HEAD
             <a class="navbar-brand" href="/dashbord"><img src="{{asset('img/dologo_l_s.png')}}" alt="DoCare"></a>
+=======
+            <a class="navbar-brand" href="/admin/dashboard"><img src="{{asset('img/dologo_l_s.png')}}" alt="DoCare"></a>
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         </li>
                
         <li><a href="javascript:void(0);" class="menu-sm"><i class="zmdi zmdi-swap"></i></a></li>        
         
+<<<<<<< HEAD
         
         <li><a href="/calendrier" title="Events"><i class="zmdi zmdi-calendar"></i></a></li>
         <li><a href="mail-inbox.html" title="Inbox"><i class="zmdi zmdi-email"></i></a></li>
@@ -48,6 +63,36 @@
         <li><a href="chat.html"><i class="zmdi zmdi-comments"></i></a></li>        
         <li><a href="javascript:void(0);" class="fullscreen" data-provide="fullscreen"><i class="zmdi zmdi-fullscreen"></i></a></li>
         <li><a href="logout" ><i class="fa-solid fa-power-off"></i></a></li>
+=======
+        <li class="notifications badgebit">
+            <a href="javascript:void(0);">
+                <i class="zmdi zmdi-notifications"></i>
+                {% for u in user %}
+                    {% if u.roles[0] != "ROLE_USER" %}
+
+                    {% if u.isactivated == 0 %}
+                    <div class="notify">
+                      <span class="heartbit"></span>
+                      <span class="point"></span>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                
+                
+
+           
+                
+                
+            </a>
+        </li>
+        
+               
+        <li><a href="javascript:void(0);" class="fullscreen" data-provide="fullscreen"><i class="zmdi zmdi-fullscreen"></i></a></li>
+        <li><a href="{{ path ('modifier_user',{'id':uc.id}) }}" title="Modifier vos info"><i class="zmdi zmdi-account-box-phone"></i></a></li>        
+
+        <li><a href="/logout" ><i class="fa-solid fa-power-off"></i></a></li>
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         <li class="power">
             <a href="javascript:void(0);" class="js-right-sidebar"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a>            
             <a href="sign-in.html" class="mega-menu"><i class="zmdi zmdi-power"></i></a>
@@ -57,6 +102,7 @@
 
 <aside class="right_menu">
     
+<<<<<<< HEAD
      <div class="notif-menu">
         <div class="slim_scroll">
             <div class="card">
@@ -101,12 +147,18 @@
                     </ul>  
                 </div>
             </div>
+=======
+    <div class="notif-menu">
+        <div class="slim_scroll">
+            
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
             <div class="card">
                 <div class="header">
                     <h2><strong>Notifications</strong></h2>
                 </div>
                 <div class="body">
                     <ul class="notification list-unstyled">
+<<<<<<< HEAD
                         <li>
                             <i class="zmdi zmdi-balance-wallet text-success"></i>
                             <strong>+$30 New sale</strong>
@@ -191,6 +243,35 @@
             </div>
         </div>
     </div>
+=======
+                    {% for u in user %}
+                    {% if u.roles[0] != "ROLE_USER" %}
+                       {% if u.isactivated == 0 %}
+                        <li>
+                            <i class="zmdi zmdi-assignment"></i>
+                            <strong>{{u.prenom}} {{u.nom}}</strong>
+                            <p class="message">{{u.roles[0]}}</p>
+                            
+                            <p><a href="{{ path ('valider_admin',{'id':u.id}) }}">Vérifier la demande</a></p>
+
+                            <small class="text-muted">{{u.datecr|date("d/m/Y")}}</small>
+                        </li>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </ul>  
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h2><strong>Messages</strong></h2>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
     <div id="rightsidebar" class="right-sidebar">
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#setting">Setting</a></li>        
@@ -367,15 +448,23 @@
                 <li>
                     <div class="user-info m-b-20">
                         <div class="image">
+<<<<<<< HEAD
                             <a href="profile.html"><img src="{{asset('assets/images/profile_av.jpg')}}" alt="User"></a>
                         </div>
                         <div class="detail">
                             <h6>belha</h6>
+=======
+                            <a href="profile.html"><img src="{{asset('uploads/user/'~ uc.image )}}" alt="User"></a>
+                        </div>
+                        <div class="detail">
+                            <h6>{{uc.prenom}} {{uc.nom}}</h6>
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
                                                        
                         </div>
                     </div>
                 </li>
                 <li class="header">MAIN</li>
+<<<<<<< HEAD
                 <li class="active open"> <a href="/dashbord"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="fa-solid fa-user"></i><span>produits</span></a>
                     <ul class="ml-menu">
@@ -387,6 +476,37 @@
                     </ul>
                
               
+=======
+                <li class="active open"> <a href="/admin/dashboard"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="fa-solid fa-user"></i><span>Utilisateur</span></a>
+                    <ul class="ml-menu">
+                        
+                        <li><a href="/admin/afficher_user">Liste des Utilisateurs</a></li>
+                        
+                        
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="fa-solid fa-stethoscope"></i><span>Médecin</span></a>
+                    <ul class="ml-menu">
+                        
+                        <li><a href="/admin/afficher_med">Liste des Médecin</a></li>
+                        <li><a href="/admin/ajout_specialite">Ajouter une Spécialité</a></li>
+                        <li><a href="/admin/afficher_specialite">Liste des Spécialités</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Pharmacie</span> </a>
+                    <ul class="ml-menu">
+                        
+                        <li><a href="/admin/afficher_pharm">Liste des Pharmacies</a></li>
+                        
+                    </ul>
+                </li>
+                
+             
+                       
+            </ul>
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
         </div>
     </div>
 </aside>
@@ -407,7 +527,11 @@
 <script src="{{asset('assets/bundles/doughnut.bundle.js')}}"></script>
 
 <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
+<<<<<<< HEAD
 <script src="{{asset('assets/js/pages/index.js')}}"></script>
+=======
+
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 
 <!-- Jquery DataTable Plugin Js --> 
 <script src="{{asset('assets/bundles/datatablescripts.bundle.js')}}"></script>
@@ -418,6 +542,15 @@
 <script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.print.min.js')}}"></script>
 
 
+<<<<<<< HEAD
 <script src="{{asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
+=======
+<script src="{{asset('assets/plugins/chartjs/Chart.bundle.js')}}"></script> <!-- Chart Plugins Js --> 
+<script src="{{asset('assets/plugins/chartjs/polar_area_chart.js')}}"></script><!-- Polar Area Chart Js -->
+
+<script src="{{asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
+
+<script src="{{asset('assets/js/pages/index.js')}}"></script>
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 </body>
 </html>

@@ -15,7 +15,11 @@
 
 .top-header {
 	height: 55px;
+<<<<<<< HEAD
 	border-top: 5px solid #21AAC4;
+=======
+	border-top: 5px solid #2986e2;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	background-color: #f2f7f9;
 }
 .top-header__links a, .languages .btn {
@@ -360,7 +364,11 @@ a.footer__contacts:hover {
 	position: relative;
 	top: -10px;
 	color: #fff;
+<<<<<<< HEAD
 	border-bottom: 4px solid #21AAC4;
+=======
+	border-bottom: 4px solid #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	z-index: 100;
 }
 .block-hourse_full {
@@ -455,10 +463,17 @@ a.footer__contacts:hover {
 }
 .advantages__inner:hover .btn {
 	color: #fff;
+<<<<<<< HEAD
 	background-color: #21AAC4;
 }
 .advantages__inner:hover .icon {
 	color: #21AAC4;
+=======
+	background-color: #f26529;
+}
+.advantages__inner:hover .icon {
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .advantages__subtitle {
 	margin-top: 34px;
@@ -598,11 +613,19 @@ a.footer__contacts:hover {
 	border-radius: 25px;
 }
 .subscribe.bg_3 .btn {
+<<<<<<< HEAD
 	color: #21AAC4;
 	background-color: #fff;
 }
 .subscribe.bg_3 .form-control {
 	background-color: #21AAC4;
+=======
+	color: #f26529;
+	background-color: #fff;
+}
+.subscribe.bg_3 .form-control {
+	background-color: #f47c49;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 /* ------- */
 
@@ -663,12 +686,20 @@ a.footer__contacts:hover {
 	font-size: 30px;
 }
 .list-icons .icon-round:hover {
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2);
 }
 .list-icons .icon-round_grey:hover {
 	color: #fff;
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	box-shadow: 0 0 0 5px #eee;
 }
 .list-progress {
@@ -733,10 +764,17 @@ a.footer__contacts:hover {
 	padding-right: 17px;
 	font-family: 'Simple-Line-Icons';
 	font-size: 12px;
+<<<<<<< HEAD
 	color: #21AAC4;
 }
 .list-mark .icon:hover:before {
 	color: #21AAC4;
+=======
+	color: #f26529;
+}
+.list-mark .icon:hover:before {
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .list-services {
 	margin-top: 16px;
@@ -753,7 +791,11 @@ a.footer__contacts:hover {
 	color: #2986e2;
 }
 .list-services_vert .list-services__item:hover .list-services__title {
+<<<<<<< HEAD
 	color: #21AAC4;
+=======
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .list-services__inner {
 	margin-bottom: 55px;
@@ -776,7 +818,11 @@ a.footer__contacts:hover {
 	font-weight: 700;
 }
 .list-services .list-services__item:hover .icon-round {
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	box-shadow: 0 0 0 5px #eee;
 }
 .list-services .btn_small {
@@ -785,7 +831,11 @@ a.footer__contacts:hover {
 }
 .list-services .list-services__item:hover .icon-round_grey {
 	color: #fff;
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	box-shadow: 0 0 0 5px #eee;
 }
 .list-services_vert .list-services__inner {
@@ -919,7 +969,11 @@ a.footer__contacts:hover {
 	transition: all 0.3s;
 }
 .social-links .social_icons:hover {
+<<<<<<< HEAD
 	color: #21AAC4;
+=======
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .yamm .dropdown-menu .t1-title .decor-brand {
 	background-image: url("../img/decor-brand.png");
@@ -972,7 +1026,11 @@ a.footer__contacts:hover {
 	transition: all 0.3s;
 }
 .btn_small:hover {
+<<<<<<< HEAD
 	background-color: #21AAC4;
+=======
+	background-color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .btn_full {
 	width: 100%;
@@ -1026,7 +1084,11 @@ a.footer__contacts:hover {
 	text-align: center;
 }
 .link-full:hover {
+<<<<<<< HEAD
 	background: #21AAC4 none repeat scroll 0 0;
+=======
+	background: #f26529 none repeat scroll 0 0;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	border-radius: 20px;
 	box-shadow: 0 -1px 3px 1px rgba(95, 95, 95, 0.88) inset;
 	color: #fff;
@@ -1076,7 +1138,11 @@ a.footer__contacts:hover {
 	height: 100%;
 	padding-top: 16px;
 	font-size: 18px;
+<<<<<<< HEAD
 	color: #21AAC4;
+=======
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 	border-left: 1px solid rgba(255, 255, 255, 1);
 	box-shadow: -1px 0 #ddd;
 	text-align: center;
@@ -1396,7 +1462,11 @@ html .scroll-top-view {
 	display: block;
 	margin-top: 5px;
 	font-size: 12px;
+<<<<<<< HEAD
 	color: #21AAC4;
+=======
+	color: #f26528;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .slider_team .slide:hover {
 	border-bottom-color: #f2f7f9;
@@ -1465,7 +1535,11 @@ html .scroll-top-view {
 	color: #888;
 }
 .slider_team .social-links .social_icons:hover {
+<<<<<<< HEAD
 	color: #21AAC4;
+=======
+	color: #f26529;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .slider_team .bx-controls {
 	bottom: 0;
@@ -1818,7 +1892,11 @@ html .scroll-top-view {
 .heartbeat-loader:not(:required):after, .heartbeat-loader:not(:required):before {
 	position: absolute;
 	content: "";
+<<<<<<< HEAD
 	background: #21AAC4;
+=======
+	background: #e87;
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
 }
 .heartbeat-loader:not(:required):before {
 	-moz-border-radius-topleft: 12px;

@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 ﻿//Project:	Alpino - Responsive Bootstrap 4 Template
 //Primary use:	Alpino - Responsive Bootstrap 4 Template
 $(function() {
+=======
+﻿$(function() {
+>>>>>>> 334cbdd17674032bccd06a53fbe23d26723f3213
     "use strict";	
 	MorrisArea();
 });
